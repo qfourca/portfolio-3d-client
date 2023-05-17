@@ -2,7 +2,7 @@ import { Scene as BABY_Scene, Engine, TransformNode } from '@babylonjs/core';
 import BuildCanvas from './build/BuildCanvas';
 import BuildEngine from './build/BuildEngine';
 import BuildDebugUI from './build/BuildDebugUI';
-import DeltaClock from '$/util/DeltaClock';
+import Init from './build/Init';
 
 export default class GlobalScene extends BABY_Scene {
   private static instance: GlobalScene;
@@ -13,6 +13,7 @@ export default class GlobalScene extends BABY_Scene {
     engine.setHardwareScalingLevel(1 / window.devicePixelRatio);
     this.instance = new GlobalScene(engine);
     await BuildDebugUI.build(this.instance);
+    Init(this.instance);
   }
 
   public get engine(): Engine {

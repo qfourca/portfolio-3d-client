@@ -6,7 +6,6 @@ export default class CameraLogic {
   private camera: TargetCamera;
   constructor() {
     this.camera = Scene._.activeCamera as TargetCamera;
-    this.camera.fov = 1.2;
     new WheelRotate(this.camera);
   }
 }
