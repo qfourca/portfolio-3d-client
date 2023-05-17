@@ -1,13 +1,21 @@
 import GlobalScene from '$/global/scene/Scene';
 import MoveAble from '$/interface/MoveAble';
-import { Mesh, TransformNode } from '@babylonjs/core';
+import { Mesh, TransformNode, Vector3 } from '@babylonjs/core';
 
 export default class BookShelfLogic extends MoveAble {
-  constructor(root: TransformNode) {
+  constructor(private root: TransformNode) {
     const mesh = root
       .getChildMeshes()
       .find((mesh) => mesh.name === 'BookShelfCore')!;
     super(mesh as Mesh, GlobalScene._.highlightLayer);
   }
-  protected onClick(): void {}
+  protected onClick(): void {
+    const camera = GlobalScene._.camera;
+    const time =
+      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 20;
+
+    const { x, y, z } = this.root.getAbsolutePosition();
+    camera.smoothMove(new Vector3(x - 20, y - 5, z), time);
+    camera.smoothRotation(new Vector3(0, Math.PI / 2, 0), time);
+  }
 }

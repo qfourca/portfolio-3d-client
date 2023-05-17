@@ -17,7 +17,7 @@ export default class GlobalScene extends BABY_Scene {
     const engine = await BuildEngine.build(canvas);
     engine.setHardwareScalingLevel(1 / window.devicePixelRatio);
     this.instance = new GlobalScene(engine);
-    await BuildDebugUI.build(this.instance);
+    await BuildDebugUI.build(this._);
   }
 
   public get engine(): Engine {
@@ -36,7 +36,7 @@ export default class GlobalScene extends BABY_Scene {
       mainTextureRatio: 1,
       isStroke: true,
     });
-    this.camera = new CustomCamera();
+    this.camera = new CustomCamera(this);
   }
   public highlightLayer: HighlightLayer;
   public camera: CustomCamera;
