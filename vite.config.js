@@ -7,7 +7,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig(({ command, mode }) => {
   return {
-    // assetsInclude: ['**/*.tflite', '**/*.babylon'],
+    assetsInclude: ['**/*.babylon'],
     plugins: [
       visualizer({
         filename: './dist/report.html',
