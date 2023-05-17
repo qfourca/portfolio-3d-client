@@ -7,7 +7,18 @@ import {
 } from '@babylonjs/core';
 
 export default abstract class MoveAble {
-  constructor(protected mesh: Mesh, protected hightlight: HighlightLayer) {
+  constructor(
+    protected mesh: Mesh | Array<Mesh>,
+    protected hightlight: HighlightLayer
+  ) {
+    if (mesh instanceof Array) {
+      mesh.forEach((m) => this.setEvent(m));
+    } else {
+      this.setEvent(mesh);
+    }
+  }
+
+  private setEvent(mesh: Mesh) {
     mesh.actionManager = new ActionManager();
     mesh.actionManager.registerAction(
       new ExecuteCodeAction(
@@ -30,11 +41,19 @@ export default abstract class MoveAble {
   }
 
   protected onHover() {
-    this.hightlight.addMesh(this.mesh, Color3.Green());
+    if (this.mesh instanceof Array) {
+      this.mesh.forEach((m) => this.hightlight.addMesh(m, Color3.Green()));
+    } else {
+      this.hightlight.addMesh(this.mesh, Color3.Green());
+    }
   }
 
   protected onLeave() {
-    this.hightlight.removeMesh(this.mesh);
+    if (this.mesh instanceof Array) {
+      this.mesh.forEach((m) => this.hightlight.removeMesh(m));
+    } else {
+      this.hightlight.removeMesh(this.mesh);
+    }
   }
 
   protected abstract onClick(): void;

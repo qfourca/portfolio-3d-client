@@ -4,10 +4,8 @@ import { Mesh, TransformNode, Vector3 } from '@babylonjs/core';
 
 export default class BookShelfLogic extends MoveAble {
   constructor(private root: TransformNode) {
-    const mesh = root
-      .getChildMeshes()
-      .find((mesh) => mesh.name === 'BookShelfCore')!;
-    super(mesh as Mesh, GlobalScene._.highlightLayer);
+    const mesh = root.getChildMeshes();
+    super(mesh as Array<Mesh>, GlobalScene._.highlightLayer);
   }
   protected onClick(): void {
     const camera = GlobalScene._.camera;

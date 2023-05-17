@@ -8,6 +8,7 @@ import BuildCanvas from './build/BuildCanvas';
 import BuildEngine from './build/BuildEngine';
 import BuildDebugUI from './build/BuildDebugUI';
 import CustomCamera from './Camera';
+import Init from './build/Init';
 
 export default class GlobalScene extends BABY_Scene {
   private static instance: GlobalScene;
@@ -17,6 +18,7 @@ export default class GlobalScene extends BABY_Scene {
     const engine = await BuildEngine.build(canvas);
     engine.setHardwareScalingLevel(1 / window.devicePixelRatio);
     this.instance = new GlobalScene(engine);
+    Init(this._);
     await BuildDebugUI.build(this._);
   }
 

@@ -1,5 +1,4 @@
 import { Scene, TargetCamera, Vector3 } from '@babylonjs/core';
-import GlobalScene from './Scene';
 
 export default class CustomCamera extends TargetCamera {
   constructor(scene: Scene) {
@@ -12,6 +11,7 @@ export default class CustomCamera extends TargetCamera {
   }
 
   private _update(time: number) {
+    this.rotation.y = this.rotation.y % (Math.PI * 2);
     this._smoothMove(time);
     this._smoothRotation(time);
   }
