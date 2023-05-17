@@ -1,11 +1,11 @@
+import CustomCamera from '$/global/scene/Camera';
 import Scene from '$/global/scene/Scene';
 import WheelRotate from '$/module/WheelRotate';
-import { TargetCamera } from '@babylonjs/core';
 
 export default class CameraLogic {
-  private camera: TargetCamera;
+  private camera: CustomCamera;
   constructor() {
-    this.camera = Scene._.activeCamera as TargetCamera;
+    this.camera = Scene._.camera;
     new WheelRotate(this.camera);
   }
 }

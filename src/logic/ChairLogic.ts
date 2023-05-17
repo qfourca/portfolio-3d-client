@@ -7,9 +7,7 @@ export default class ChairLogic extends MoveAble {
     const mesh = root
       .getChildMeshes()
       .find((mesh) => mesh.name === 'Chair_primitive0')!;
-    //@ts-expect-error
-    //TODO: get layer
-    super(mesh as Mesh, GlobalScene._.effectLayers[0]);
+    super(mesh as Mesh, GlobalScene._.highlightLayer);
   }
   protected onClick(): void {}
 }
