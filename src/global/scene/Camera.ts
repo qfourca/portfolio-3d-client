@@ -1,4 +1,5 @@
 import { Scene, TargetCamera, Vector3 } from '@babylonjs/core';
+import GlobalScene from './Scene';
 
 export default class CustomCamera extends TargetCamera {
   constructor(scene: Scene) {

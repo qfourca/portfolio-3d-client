@@ -7,6 +7,7 @@ import {
 } from '@babylonjs/core';
 
 export default abstract class MoveAble {
+  public isActivate: boolean = true;
   constructor(
     protected mesh: Mesh | Array<Mesh>,
     protected hightlight: HighlightLayer
@@ -41,10 +42,12 @@ export default abstract class MoveAble {
   }
 
   protected onHover() {
-    if (this.mesh instanceof Array) {
-      this.mesh.forEach((m) => this.hightlight.addMesh(m, Color3.Green()));
-    } else {
-      this.hightlight.addMesh(this.mesh, Color3.Green());
+    if (this.isActivate) {
+      if (this.mesh instanceof Array) {
+        this.mesh.forEach((m) => this.hightlight.addMesh(m, Color3.Green()));
+      } else {
+        this.hightlight.addMesh(this.mesh, Color3.Green());
+      }
     }
   }
 

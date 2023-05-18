@@ -2,6 +2,7 @@ import {
   Scene as BABY_Scene,
   Engine,
   HighlightLayer,
+  Mesh,
   TransformNode,
 } from '@babylonjs/core';
 import BuildCanvas from './build/BuildCanvas';
@@ -30,6 +31,11 @@ export default class GlobalScene extends BABY_Scene {
   }
   public get htmlroot(): HTMLElement {
     return this.canvas.parentElement!;
+  }
+  public get root(): Mesh {
+    console.log(this.rootNodes);
+    //@ts-expect-error
+    return this.rootNodes.find(({ _isMesh }) => _isMesh);
   }
 
   constructor(engine: Engine) {
