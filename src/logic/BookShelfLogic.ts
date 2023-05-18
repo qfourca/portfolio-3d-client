@@ -32,10 +32,10 @@ export default class BookShelfLogic extends MoveAble {
   protected onClick(): void {
     const camera = GlobalScene._.camera;
     const time =
-      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 20;
+      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 2000;
 
     const { x, y, z } = this.root.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x - 20, y - 5, z), time);
+    camera.smoothMove(new Vector3(x - 0.2, y - 0.05, z), time);
     camera.smoothRotation(new Vector3(0, Math.PI / 2, 0), time);
   }
   // public addBook: (floor: number, icon: string, name: string) => void = (

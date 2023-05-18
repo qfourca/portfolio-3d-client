@@ -10,10 +10,10 @@ export default class SofaLogic extends MoveAble {
   protected onClick(): void {
     const camera = GlobalScene._.camera;
     const time =
-      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 20;
+      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 2000;
 
     const { x, y, z } = this.root.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x, y + 10, z), time);
+    camera.smoothMove(new Vector3(x, y + 0.1, z), time);
     camera.smoothRotation(new Vector3(0, Math.PI, 0), time);
   }
 }

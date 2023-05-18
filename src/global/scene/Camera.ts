@@ -2,9 +2,11 @@ import { Scene, UniversalCamera, Vector3 } from '@babylonjs/core';
 
 export default class CustomCamera extends UniversalCamera {
   constructor(scene: Scene) {
-    super('camera', new Vector3(0, 25, 0), scene);
+    super('camera', new Vector3(0, 0.3, 0), scene);
     this.fov = 1.3;
-    this.rotation.x += 0.2;
+    this.rotation.x += 0.3;
+    this.minZ = 0.01;
+    this.maxZ = 100;
     scene.registerBeforeRender(() => {
       this._update(scene.deltaTime);
     });

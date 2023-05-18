@@ -38,9 +38,9 @@ export default class BookMoule extends MoveAble {
 
     let material = BookMoule.bookCoverMaterial.get(type);
     if (!material) {
-      material = new PBRCustomMaterial(type + 'bookCoverMaterial');
+      material = new StandardMaterial(type + 'bookCoverMaterial');
       // material.specularPower = Infinity;
-      material.albedoColor = BookMoule.typeToColor(type);
+      material.diffuseColor = BookMoule.typeToColor(type);
       BookMoule.bookCoverMaterial.set(type, material);
     }
     bookCover!.material = material;
@@ -58,8 +58,7 @@ export default class BookMoule extends MoveAble {
     });
     return res;
   };
-  private static bookCoverMaterial: Map<bookType, PBRCustomMaterial> =
-    new Map();
+  private static bookCoverMaterial: Map<bookType, StandardMaterial> = new Map();
   private static typeToFloor = (type: bookType) => {
     switch (type) {
       case 'language':

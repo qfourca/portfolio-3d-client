@@ -10,10 +10,10 @@ export default class ChairLogic extends MoveAble {
   protected onClick(): void {
     const camera = GlobalScene._.camera;
     const time =
-      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 20;
+      Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 2000;
 
     const { x, y, z } = this.root.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x - 3, y + 18, z), time);
+    camera.smoothMove(new Vector3(x - 0.03, y + 0.18, z), time);
     camera.smoothRotation(new Vector3(0.1, Math.PI / 2, 0), time);
   }
 }
