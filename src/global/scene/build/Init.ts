@@ -13,11 +13,14 @@ export default (scene: GlobalScene) => {
     new Vector3(0, -1, 0),
     scene
   );
-  const pointLight = new PointLight('Point', new Vector3(0, 0.3, 0), scene);
-  dirLight.intensity = 0.25;
-  pointLight.intensity = 0.45;
+  dirLight.intensity = 0.3;
   dirLight.diffuse = new Color3(0.75, 0.75, 0.75);
-  pointLight.diffuse = new Color3(0.75, 0.75, 0.75);
-  scene.addLight(dirLight);
-  scene.addLight(pointLight);
+
+  const SunLight = new PointLight('SunLight', new Vector3(0, 0.5, 0), scene);
+  SunLight.intensity = 1.1;
+  SunLight.diffuse = new Color3(0.75, 0.75, 0.75);
+
+  const BulbLight = new PointLight('BulbLight', new Vector3(0, 0.35, 0), scene);
+  BulbLight.intensity = 0.1;
+  BulbLight.diffuse = new Color3(1, 1, 0.8);
 };

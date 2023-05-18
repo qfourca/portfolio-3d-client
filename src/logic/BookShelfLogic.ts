@@ -1,7 +1,7 @@
 import GlobalScene from '$/global/scene/Scene';
 import MoveAble from '$/interface/MoveAble';
 import BookMoule from '$/module/BookModule';
-import { Mesh, TransformNode, Vector3 } from '@babylonjs/core';
+import { Mesh, PointLight, TransformNode, Vector3 } from '@babylonjs/core';
 import axios from 'axios';
 
 export default class BookShelfLogic extends MoveAble {
@@ -13,6 +13,13 @@ export default class BookShelfLogic extends MoveAble {
       .find((m) => m.name === 'Book')!;
     BookMoule.bookShelf = root;
     BookMoule.bookNode = this.original;
+    // const pointLight = new PointLight(
+    //   'Point',
+    //   new Vector3(0.2, -0.05, 0.2),
+    //   GlobalScene._
+    // );
+    // pointLight.parent = this.root;
+    // pointLight.intensity = 0.2;
     axios
       .get<{
         data: Array<{
@@ -38,52 +45,5 @@ export default class BookShelfLogic extends MoveAble {
     camera.smoothMove(new Vector3(x - 0.2, y - 0.05, z), time);
     camera.smoothRotation(new Vector3(0, Math.PI / 2, 0), time);
   }
-  // public addBook: (floor: number, icon: string, name: string) => void = (
-  //   floor: number,
-  //   icon: string,
-  //   name: string
-  // ) => {
-  //   const newPic = this.original.clone();
-  //   newPic.position.set(
-  //     3,
-  //     17 - floor * 31,
-  //     110 - this.getCountBooks(floor) * 15
-  //   );
-  //   newPic.visible = true;
-  //   this.target.add(newPic);
-  //   const controller = new BookController(
-  //     this.core,
-  //     this.scene,
-  //     this.eventController,
-  //     newPic
-  //   );
-  //   this.books.push(controller);
-  //   controller.__init__();
-  //   controller.set(floor, icon, name);
-  //   return controller;
-  // };
-
-  // private getCountBooks = (num: number) => {
-  //   let res = 0;
-  //   this.books.forEach(({ floor }) => {
-  //     if (floor === num) res++;
-  //   });
-  //   return res;
-  // };
-
-  private static typeToFloor = (type: bookType) => {
-    switch (type) {
-      case 'language':
-        return 0;
-      case 'library':
-        return 1;
-      case 'framework':
-        return 2;
-      case 'tool':
-        return 3;
-      case 'etc':
-        return 4;
-    }
-  };
 }
 declare type bookType = 'tool' | 'language' | 'etc' | 'framework' | 'library';
