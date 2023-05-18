@@ -1,7 +1,6 @@
-import { Scene, TargetCamera, Vector3 } from '@babylonjs/core';
-import GlobalScene from './Scene';
+import { Scene, UniversalCamera, Vector3 } from '@babylonjs/core';
 
-export default class CustomCamera extends TargetCamera {
+export default class CustomCamera extends UniversalCamera {
   constructor(scene: Scene) {
     super('camera', new Vector3(0, 25, 0), scene);
     this.fov = 1.3;
