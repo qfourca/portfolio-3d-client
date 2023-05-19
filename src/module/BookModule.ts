@@ -79,15 +79,15 @@ export default class BookMoule extends MoveAble {
   private static typeToColor = (type: bookType) => {
     switch (type) {
       case 'language':
-        return '#FEA1A1';
+        return '#E76161';
       case 'library':
-        return '#FEFF86';
+        return '#FFD95A';
       case 'framework':
-        return '#B0DAFF';
+        return '#19A7CE';
       case 'tool':
-        return '#E5F9DB';
+        return '#27E1C1';
       case 'etc':
-        return '#D4ADFC';
+        return '#7149C6';
     }
   };
 }
