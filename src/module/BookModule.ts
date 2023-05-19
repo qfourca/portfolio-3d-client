@@ -2,17 +2,11 @@ import GlobalScene from '$/global/scene/Scene';
 import MoveAble from '$/interface/MoveAble';
 import {
   Color3,
-  PBRBaseMaterial,
-  PBRBaseSimpleMaterial,
-  PBRSpecularGlossinessMaterial,
   StandardMaterial,
   TransformNode,
+  Vector3,
 } from '@babylonjs/core';
-import {
-  NormalMaterial,
-  PBRCustomMaterial,
-  SimpleMaterial,
-} from '@babylonjs/materials';
+import BookTagModule from './BookTagModule';
 
 export default class BookMoule extends MoveAble {
   public static bookNode: TransformNode;
@@ -24,14 +18,13 @@ export default class BookMoule extends MoveAble {
     public title: string
   ) {
     const book = BookMoule.bookNode.clone(title + 'Book', BookMoule.bookShelf)!;
-    super(book.getChildMeshes(), GlobalScene._.highlightLayer);
     const floor = BookMoule.typeToFloor(type);
     book.position.set(
       3,
-      17 - floor * 32,
-      110 - BookMoule.getCountBooks(floor) * 21
+      17 - floor * 31.5,
+      110 - BookMoule.getCountBooks(floor) * 20
     );
-    BookMoule.books.push(this);
+
     const bookCover = book
       .getChildMeshes()
       .find(({ name }) => name === book.name + '.BookCover');
@@ -39,11 +32,21 @@ export default class BookMoule extends MoveAble {
     let material = BookMoule.bookCoverMaterial.get(type);
     if (!material) {
       material = new StandardMaterial(type + 'bookCoverMaterial');
-      // material.specularPower = Infinity;
-      material.diffuseColor = BookMoule.typeToColor(type);
+      material.diffuseColor = Color3.FromHexString(BookMoule.typeToColor(type));
       BookMoule.bookCoverMaterial.set(type, material);
     }
     bookCover!.material = material;
+
+    const bookTag = new BookTagModule(
+      title,
+      icon,
+      book!,
+      BookMoule.typeToColor(type),
+      new Vector3(0, 0, 145)
+    );
+
+    super(book.getChildMeshes(), GlobalScene._.highlightLayer);
+    BookMoule.books.push(this);
     this.isActivate = false;
   }
   protected onClick(): void {
@@ -76,15 +79,15 @@ export default class BookMoule extends MoveAble {
   private static typeToColor = (type: bookType) => {
     switch (type) {
       case 'language':
-        return new Color3(0.7, 0, 0.2);
+        return '#FEA1A1';
       case 'library':
-        return new Color3(0.1, 0.8, 0.8);
+        return '#FEFF86';
       case 'framework':
-        return new Color3(0, 0.8, 0);
+        return '#B0DAFF';
       case 'tool':
-        return new Color3(0.8, 0.1, 0.8);
+        return '#E5F9DB';
       case 'etc':
-        return new Color3(0.1, 0.1, 0.1);
+        return '#D4ADFC';
     }
   };
 }
