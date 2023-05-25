@@ -13,16 +13,16 @@ export default class BookShelfLogic extends MoveAble {
       .getChildTransformNodes()
       .find((m) => m.name === 'Book')!;
     axios
-      .get<{
-        data: Array<{
+      .get<
+        Array<{
           icon: string;
           title: string;
           type: bookType;
           uuid: string;
-        }>;
-      }>('http://localhost:8000/notion/techstack')
+        }>
+      >('http://localhost:8000/techstack/list')
       .then((res) => {
-        res.data.data.forEach((element) => {
+        res.data.forEach((element) => {
           this.bookModules.push(
             new BookMoule(element.type, element.icon, element.title)
           );

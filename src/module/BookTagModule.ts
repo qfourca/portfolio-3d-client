@@ -4,13 +4,15 @@ import {
   Mesh,
   MeshBuilder,
   StandardMaterial,
+  Texture,
   TransformNode,
   Vector2,
   Vector3,
 } from '@babylonjs/core';
 
 export default class BookTagModule {
-  private nameTagSize = new Vector2(98, 200);
+  private static nameTagSize = new Vector2(90, 180);
+  private static iconSize = new Vector2(90, 90);
 
   constructor(
     private name: string,
@@ -21,13 +23,16 @@ export default class BookTagModule {
   ) {
     const nameTag = this.buildNameTag();
     nameTag.rotation.set(Math.PI / 2, 0, 0);
-    nameTag.position = position.add(new Vector3(0, -40, 0));
+    nameTag.position = position.add(new Vector3(0, -50, 0));
+    const iconMesh = this.buildBookIcon();
+    iconMesh.rotation.set(-Math.PI / 2, Math.PI / 2, Math.PI / 2);
+    iconMesh.position = position.add(new Vector3(0, 100, 0));
   }
 
   private buildNameTag(): Mesh {
     const nameMesh = MeshBuilder.CreateGround(this.name + 'nameTag', {
-      width: this.nameTagSize.x,
-      height: this.nameTagSize.y,
+      width: BookTagModule.nameTagSize.x,
+      height: BookTagModule.nameTagSize.y,
     });
 
     nameMesh.parent = this.parent;
@@ -35,8 +40,8 @@ export default class BookTagModule {
     const texture = new DynamicTexture(
       this.name + 'nameTexture',
       {
-        width: this.nameTagSize.x,
-        height: this.nameTagSize.y,
+        width: BookTagModule.nameTagSize.x,
+        height: BookTagModule.nameTagSize.y,
       },
       GlobalScene._,
       undefined,
@@ -55,7 +60,12 @@ export default class BookTagModule {
     const textureContext = texture.getContext();
 
     textureContext.fillStyle = this.color;
-    textureContext.fillRect(0, 0, this.nameTagSize.x, this.nameTagSize.y);
+    textureContext.fillRect(
+      0,
+      0,
+      BookTagModule.nameTagSize.x,
+      BookTagModule.nameTagSize.y
+    );
     textureContext.fillStyle = '#000000';
     textureContext.font = '48px san serif';
     for (let i = 0; i < this.name.length; i++) {
@@ -64,5 +74,23 @@ export default class BookTagModule {
     texture.update(false);
 
     return nameMesh;
+  }
+
+  private buildBookIcon(): Mesh {
+    const iconMesh = MeshBuilder.CreateGround(this.name + 'Icon', {
+      width: BookTagModule.iconSize.x,
+      height: BookTagModule.iconSize.y,
+    });
+    iconMesh.parent = this.parent;
+    const iconMaterial = new StandardMaterial(
+      this.name + 'icon',
+      GlobalScene._
+    );
+
+    iconMaterial.diffuseTexture = new Texture(this.icon);
+    //@ts-expect-error
+    iconMaterial.diffuseTexture.uScale = -1;
+    iconMesh.material = iconMaterial;
+    return iconMesh;
   }
 }

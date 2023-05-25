@@ -1,15 +1,18 @@
 import App from './app/App';
-
 App.init(
   {
     debugUI: true,
     production: __ISPRODUCTION__,
-    engine: undefined,
+    engine: 'webgl',
   },
   document.getElementById('app')!
-).then(() => {
-  App.run();
-});
+)
+  .then(() => {
+    App.run();
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 declare global {
   const __ISPRODUCTION__: boolean;
