@@ -57,7 +57,14 @@ export default class CustomCamera extends UniversalCamera {
     }
   }
   public smoothRotation(pos: Vector3, duration: number, reverse?: boolean) {
-    this._smoothRotation_.goal = pos.subtract(this.rotation);
+    let x, y, z;
+    const sub = pos.subtract(this.rotation);
+    const cir = Math.PI * 2;
+    x = sub.x % cir;
+    y = sub.y % cir;
+    z = sub.z % cir;
+
+    this._smoothRotation_.goal = new Vector3(x, y, z);
     this._smoothRotation_.duration = duration;
     this._smoothRotation_.current = 0;
   }
