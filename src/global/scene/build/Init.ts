@@ -1,10 +1,4 @@
-import {
-  Color3,
-  DirectionalLight,
-  HemisphericLight,
-  PointLight,
-  Vector3,
-} from '@babylonjs/core';
+import { Color3, DirectionalLight, PointLight, Vector3 } from '@babylonjs/core';
 import GlobalScene from '../Scene';
 
 export default (scene: GlobalScene) => {

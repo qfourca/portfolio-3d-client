@@ -7,7 +7,7 @@ export default async () => {
   (load.rootNodes[load.rootNodes.length - 1] as Mesh).scaling = new Vector3(
     0.01,
     0.01,
-    -0.01
+    0.01
   );
 
   return load;

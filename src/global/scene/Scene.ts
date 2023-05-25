@@ -17,7 +17,6 @@ export default class GlobalScene extends BABY_Scene {
   public static async set(parent: HTMLElement) {
     const canvas = BuildCanvas.build(parent);
     const engine = await BuildEngine.build(canvas);
-    engine.setHardwareScalingLevel(1 / window.devicePixelRatio);
     this.instance = new GlobalScene(engine);
     Init(this._);
     await BuildDebugUI.build(this._);
@@ -33,13 +32,13 @@ export default class GlobalScene extends BABY_Scene {
     return this.canvas.parentElement!;
   }
   public get root(): Mesh {
-    console.log(this.rootNodes);
     //@ts-expect-error
     return this.rootNodes.find(({ _isMesh }) => _isMesh);
   }
 
   constructor(engine: Engine) {
     super(engine);
+    this.useRightHandedSystem = true;
     this.highlightLayer = new HighlightLayer('highlight_layer', this, {
       mainTextureRatio: 1,
       isStroke: true,

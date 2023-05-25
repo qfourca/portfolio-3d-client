@@ -1,7 +1,7 @@
 import App from './app/App';
 App.init(
   {
-    debugUI: true,
+    debugUI: false,
     production: __ISPRODUCTION__,
     engine: 'webgl',
   },

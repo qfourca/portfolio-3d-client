@@ -4,12 +4,14 @@ import { Engine } from '@babylonjs/core/Engines/engine';
 
 export default class BuildEngine {
   public static async build(canvas: HTMLCanvasElement) {
+    let engine: Engine;
     if (Config._.engine == 'webgpu') {
-      const webgpu = new WebGPUEngine(canvas);
-      await webgpu.initAsync();
-      return webgpu;
+      engine = new WebGPUEngine(canvas);
+      await (engine as WebGPUEngine).initAsync();
     } else {
-      return new Engine(canvas);
+      engine = new Engine(canvas);
     }
+    engine.setHardwareScalingLevel(1 / window.devicePixelRatio);
+    return engine;
   }
 }

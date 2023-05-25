@@ -3,8 +3,8 @@ import Config from '$/global/config/Config';
 
 export default class BuildDebugUI {
   public static async build(scene: Scene) {
+    await import('@babylonjs/inspector');
     if (Config._.debugUI) {
-      await import('@babylonjs/inspector');
       scene.debugLayer.show({
         overlay: false,
       });
