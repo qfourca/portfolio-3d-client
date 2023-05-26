@@ -1,5 +1,7 @@
 import GlobalScene from '$/global/scene/Scene';
 import {
+  Color3,
+  Color4,
   DynamicTexture,
   Mesh,
   MeshBuilder,
@@ -9,6 +11,7 @@ import {
   Vector2,
   Vector3,
 } from '@babylonjs/core';
+import { CustomMaterial } from '@babylonjs/materials';
 
 export default class BookTagModule {
   private static nameTagSize = new Vector2(90, 180);
@@ -82,12 +85,14 @@ export default class BookTagModule {
       height: BookTagModule.iconSize.y,
     });
     iconMesh.parent = this.parent;
-    const iconMaterial = new StandardMaterial(
-      this.name + 'icon',
-      GlobalScene._
-    );
+    const iconMaterial = new CustomMaterial(this.name + 'icon', GlobalScene._);
 
     iconMaterial.diffuseTexture = new Texture(this.icon);
+    iconMaterial.diffuseTexture.hasAlpha = false;
+    iconMaterial.Fragment_Custom_Diffuse(`
+      baseColor.rgb = mix(vec3(1.), baseColor.rgb, baseColor.a);
+    `);
+
     //@ts-expect-error
     iconMaterial.diffuseTexture.uScale = -1;
     iconMesh.material = iconMaterial;
