@@ -11,10 +11,10 @@ export default (scene: GlobalScene) => {
   dirLight.diffuse = new Color3(0.75, 0.75, 0.75);
 
   const SunLight = new PointLight('SunLight', new Vector3(0, 0.5, 0), scene);
-  SunLight.intensity = 1.1;
+  SunLight.intensity = 1.4;
   SunLight.diffuse = new Color3(0.75, 0.75, 0.75);
 
-  const BulbLight = new PointLight('BulbLight', new Vector3(0, 0.35, 0), scene);
-  BulbLight.intensity = 0.1;
+  const BulbLight = new PointLight('BulbLight', new Vector3(0, 0.33, 0), scene);
+  BulbLight.intensity = 0.2;
   BulbLight.diffuse = new Color3(1, 1, 0.8);
 };
