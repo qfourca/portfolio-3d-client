@@ -17,10 +17,12 @@ export default class WheelRotate {
       }
     });
 
-    GlobalScene._.registerBeforeRender(this.update.bind(this));
+    // GlobalScene._.registerBeforeRender(this.update.bind(this));
+    requestAnimationFrame(this.update.bind(this));
   }
 
   protected update() {
+    requestAnimationFrame(this.update.bind(this));
     this.target.rotation.y += this.wheelControl * this.sensitive;
     this.wheelControl = 0;
   }
