@@ -1,13 +1,13 @@
 import GlobalScene from '$/global/scene/Scene';
-import MoveAble from '$/interface/MoveAble';
 import { Mesh, TransformNode, Vector3 } from '@babylonjs/core';
+import ObserverView from './ObserverView';
+import Observer from './Observer';
 
-export default class SofaLogic extends MoveAble {
-  constructor(private root: TransformNode) {
-    const mesh = root as TransformNode;
-    super(mesh as Mesh, GlobalScene._.highlightLayer);
+export default class SofaView extends ObserverView {
+  constructor(private root: Mesh, observer: Observer) {
+    super(root, observer);
   }
-  protected onClick(): void {
+  public click(): void {
     const camera = GlobalScene._.camera;
     const time =
       Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 2000;

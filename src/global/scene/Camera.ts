@@ -11,7 +11,7 @@ export default class CustomCamera extends UniversalCamera {
     scene.registerBeforeRender(() => {
       this._update(scene.deltaTime);
     });
-    const rotate = new WheelRotate(this, 0.001);
+    new WheelRotate(this, 0.001);
   }
 
   private _update(time: number) {
@@ -59,14 +59,14 @@ export default class CustomCamera extends UniversalCamera {
     }
   }
   public smoothRotation(pos: Vector3, duration: number, reverse?: boolean) {
-    let x, y, z;
-    const sub = pos.subtract(this.rotation);
+    const { x, y, z } = pos
+      .subtract(this.rotation)
+      .add(new Vector3().setAll(Math.PI));
     const cir = Math.PI * 2;
-    x = sub.x % cir;
-    y = sub.y % cir;
-    z = sub.z % cir;
-
-    this._smoothRotation_.goal = new Vector3(x, y, z);
+    const goal = new Vector3(x % cir, y % cir, z % cir).subtract(
+      new Vector3().setAll(Math.PI)
+    );
+    this._smoothRotation_.goal = goal;
     this._smoothRotation_.duration = duration;
     this._smoothRotation_.current = 0;
   }

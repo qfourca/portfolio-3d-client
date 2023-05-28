@@ -1,13 +1,15 @@
 import GlobalScene from '$/global/scene/Scene';
 import MoveAble from '$/interface/MoveAble';
 import { Mesh, TransformNode, Vector3 } from '@babylonjs/core';
+import ObserverView from './ObserverView';
+import Observer from './Observer';
 
-export default class ChairLogic extends MoveAble {
-  constructor(private root: TransformNode) {
+export default class ChairView extends ObserverView {
+  constructor(private root: TransformNode, observer: Observer) {
     const mesh = root.getChildMeshes();
-    super(mesh as Array<Mesh>, GlobalScene._.highlightLayer);
+    super(mesh as Array<Mesh>, observer);
   }
-  protected onClick(): void {
+  public click(): void {
     const camera = GlobalScene._.camera;
     const time =
       Vector3.Distance(camera.position, this.root.getAbsolutePosition()) * 2000;

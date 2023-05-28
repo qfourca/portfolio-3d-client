@@ -5,12 +5,14 @@ import Observer from './Observer';
 export default abstract class ObserverViewWithChildren<
   T extends ObserverView
 > extends ObserverView {
+  protected children: Array<T>;
   constructor(
     mesh: Mesh | Array<Mesh>,
     observer: Observer,
-    protected children: Array<T>
+    children?: Array<T>
   ) {
     super(mesh, observer);
+    this.children = children ?? new Array();
   }
 
   public activate(): void {

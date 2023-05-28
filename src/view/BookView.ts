@@ -6,7 +6,7 @@ import {
   TransformNode,
   Vector3,
 } from '@babylonjs/core';
-import BookTagModule from '../../module/BookTagModule';
+import BookTagModule from '../module/BookTagModule';
 import ObserverView from './ObserverView';
 
 export default class BookView extends ObserverView {

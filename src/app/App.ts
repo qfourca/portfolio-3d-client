@@ -1,7 +1,8 @@
 import Config, { RawConfig } from '$/global/config/Config';
 import Scene from '$/global/scene/Scene';
 import RoomLogic from '$/logic/RoomLogic';
-import Observer from '$/logic/view/Observer';
+import Observer from '$/view/Observer';
+import RoomObserver from '$/view/RoomObserver';
 import LoadScene from './LoadScene';
 
 export default class App {
@@ -11,7 +12,7 @@ export default class App {
 
     await LoadScene();
 
-    new Observer();
+    new RoomObserver();
   }
 
   public static run() {
