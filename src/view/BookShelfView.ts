@@ -4,15 +4,16 @@ import axios from 'axios';
 import Observer from './Observer';
 import ObserverViewWithChildren from './ObserverViewWithChildren';
 import BookView from './BookView';
+import api from '$/api/api';
 
 export default class BookShelfView extends ObserverViewWithChildren<BookView> {
+  private bookOrigin: TransformNode;
   constructor(private root: TransformNode, observer: Observer) {
     super(root.getChildMeshes(), observer, new Array());
-    BookView.bookShelf = root;
-    BookView.bookNode = root
+    this.bookOrigin = root
       .getChildTransformNodes()
       .find((m) => m.name === 'Book')!;
-    axios
+    api
       .get<
         Array<{
           icon: string;
@@ -20,16 +21,22 @@ export default class BookShelfView extends ObserverViewWithChildren<BookView> {
           type: bookType;
           uuid: string;
         }>
-      >('http://localhost:8000/techstack/list')
+      >('/techstack/list')
       .then((res) => {
         res.data.forEach((element) => {
           this.children.push(
-            new BookView(element.type, element.icon, element.title)
+            new BookView(
+              element.type,
+              element.icon,
+              element.title,
+              this.bookOrigin,
+              this.root
+            )
           );
         });
         this.mesh = root.getChildMeshes();
         this.activate();
-        BookView.bookNode.dispose();
+        this.bookOrigin.dispose();
       });
   }
 

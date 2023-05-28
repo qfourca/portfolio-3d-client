@@ -1,5 +1,3 @@
-import GlobalScene from '$/global/scene/Scene';
-import MoveAble from '$/interface/MoveAble';
 import {
   Color3,
   StandardMaterial,
@@ -13,15 +11,15 @@ export default class BookView extends ObserverView {
   public click(): void {
     throw new Error('Method not implemented.');
   }
-  public static bookNode: TransformNode;
-  public static bookShelf: TransformNode;
   private static books: Array<BookView> = new Array();
   constructor(
     public type: bookType,
     public icon: string,
-    public title: string
+    public title: string,
+    original: TransformNode,
+    parent: TransformNode
   ) {
-    const book = BookView.bookNode.clone(title + 'Book', BookView.bookShelf)!;
+    const book = original.clone(title + 'Book', parent)!;
     const floor = BookView.typeToFloor(type);
     book.position.set(
       3,
