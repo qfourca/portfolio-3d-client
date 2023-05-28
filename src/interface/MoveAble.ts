@@ -1,3 +1,4 @@
+import GlobalScene from '$/global/scene/Scene';
 import {
   ActionManager,
   Color3,
@@ -8,10 +9,12 @@ import {
 
 export default abstract class MoveAble {
   public isActivate: boolean = true;
+  protected actionManager: ActionManager;
   constructor(
     protected mesh: Mesh | Array<Mesh>,
     protected hightlight: HighlightLayer
   ) {
+    this.actionManager = new ActionManager();
     if (mesh instanceof Array) {
       mesh.forEach((m) => this.setEvent(m));
     } else {
@@ -20,7 +23,7 @@ export default abstract class MoveAble {
   }
 
   private setEvent(mesh: Mesh) {
-    mesh.actionManager = new ActionManager();
+    mesh.actionManager = this.actionManager;
     mesh.actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPointerOverTrigger,
@@ -48,6 +51,7 @@ export default abstract class MoveAble {
       } else {
         this.hightlight.addMesh(this.mesh, Color3.Green());
       }
+    } else {
     }
   }
 

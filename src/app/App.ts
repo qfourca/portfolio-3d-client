@@ -11,7 +11,6 @@ export default class App {
 
     await LoadScene();
 
-    new CameraLogic();
     new RoomLogic();
   }
 
