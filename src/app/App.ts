@@ -1,7 +1,7 @@
 import Config, { RawConfig } from '$/global/config/Config';
 import Scene from '$/global/scene/Scene';
-import CameraLogic from '$/logic/CameraLogic';
 import RoomLogic from '$/logic/RoomLogic';
+import Observer from '$/logic/view/Observer';
 import LoadScene from './LoadScene';
 
 export default class App {
@@ -11,7 +11,7 @@ export default class App {
 
     await LoadScene();
 
-    new RoomLogic();
+    new Observer();
   }
 
   public static run() {

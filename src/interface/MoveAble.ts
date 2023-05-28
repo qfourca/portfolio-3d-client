@@ -1,4 +1,3 @@
-import GlobalScene from '$/global/scene/Scene';
 import {
   ActionManager,
   Color3,
@@ -8,7 +7,19 @@ import {
 } from '@babylonjs/core';
 
 export default abstract class MoveAble {
-  public isActivate: boolean = true;
+  private _isActivate: boolean = true;
+  public set isActivate(value: boolean) {
+    if (value) {
+      this.actionManager.hoverCursor = 'pointer';
+    } else {
+      this.onLeave();
+      this.actionManager.hoverCursor = 'default';
+    }
+    this._isActivate = value;
+  }
+  public get isActivate() {
+    return this._isActivate;
+  }
   protected actionManager: ActionManager;
   constructor(
     protected mesh: Mesh | Array<Mesh>,
