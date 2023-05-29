@@ -18,5 +18,9 @@ export default defineConfig(({ command, mode }) => {
     define: {
       __ISPRODUCTION__: mode !== 'development',
     },
+    server: {
+      /*here*/
+      hmr: { overlay: false },
+    },
   };
 });

@@ -8,16 +8,20 @@ import {
 import ObserverView from './ObserverView';
 import { CustomMaterial } from '@babylonjs/materials';
 import GlobalScene from '$/global/scene/Scene';
+import { Observable } from './Observer';
 
 export default class PhotoView extends ObserverView {
   private static photoFrames: Array<PhotoView> = new Array();
   private static rootPosition: Vector3 = new Vector3(0.7, 0.6, -1);
   private static photoSize: Vector2 = new Vector2(-0.3, -0.5);
 
+  private photo: TransformNode;
+
   constructor(
     public thumbnail: string,
     original: TransformNode,
-    parent: TransformNode
+    parent: TransformNode,
+    observer: Observable<PhotoView>
   ) {
     const photo = original.clone(
       PhotoView.photoFrames.length + 'Photo',
@@ -44,11 +48,30 @@ export default class PhotoView extends ObserverView {
 
     picture.rotation = new Vector3(-Math.PI / 2, 0, 0);
 
-    super(photo.getChildMeshes());
+    super(photo.getChildMeshes(), observer);
     PhotoView.photoFrames.push(this);
+    this.photo = photo;
   }
 
-  click() {}
+  click() {
+    const camera = GlobalScene._.camera;
+    const time =
+      Vector3.Distance(camera.position, this.photo.getAbsolutePosition()) *
+      2000;
+
+    const { x, y, z } = this.photo.getAbsolutePosition();
+    camera.smoothMove(new Vector3(x, y, z - 0.09), time);
+    camera.smoothRotation(new Vector3(0, 0, 0), time);
+
+    const canvas = GlobalScene._.canvas;
+    canvas.style.transition = `${time}ms`;
+    console.log(canvas.style.aspectRatio);
+    canvas.style[
+      document.body.offsetWidth / document.body.offsetHeight > 1
+        ? 'width'
+        : 'height'
+    ] = '50%';
+  }
 
   private static getNextposition(): Vector3 {
     const currentCount = this.photoFrames.length;

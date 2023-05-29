@@ -5,8 +5,9 @@ import Observer from './Observer';
 import SofaView from './SofaView';
 import ChairView from './ChairView';
 import GalleryView from './GalleryView';
+import ObserverView from './ObserverView';
 
-export default class RoomObserver extends Observer {
+export default class RoomObserver extends Observer<ObserverView> {
   constructor() {
     super();
     this.views.push(
