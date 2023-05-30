@@ -9,7 +9,6 @@ import BuildEngine from './build/BuildEngine';
 import BuildDebugUI from './build/BuildDebugUI';
 import CustomCamera from './Camera';
 import Init from './build/Init';
-import { doc } from 'prettier';
 
 export default class GlobalScene extends BABY_Scene {
   private static instance: GlobalScene;

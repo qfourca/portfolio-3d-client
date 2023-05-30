@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ReactDOM, { Root } from 'react-dom/client';
 import { NotionRenderer } from 'react-notion-x';
 import 'react-notion/src/styles.css';
-
+import { Dna } from 'react-loader-spinner';
 export default class NotionComponent {
   private reactRoot: Root;
   private _url: string = '';
@@ -22,6 +22,7 @@ export default class NotionComponent {
   private static ReactNotion(props: { url: string }) {
     const [response, setResponse] = useState<any | null>(null);
     useEffect(() => {
+      setResponse(null);
       api.get(`/notion/page?page=${props.url}`).then((data) => {
         setResponse(data.data);
       });
@@ -31,7 +32,24 @@ export default class NotionComponent {
       <>
         {' '}
         {response === null ? (
-          <></>
+          <div
+            style={{
+              width: '100%',
+              height: 'calc(100vh - 40px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Dna
+              visible={true}
+              height="30%"
+              width="30%"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+            />
+          </div>
         ) : (
           <NotionRenderer recordMap={response} fullPage={false} />
         )}
