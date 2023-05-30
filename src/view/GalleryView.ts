@@ -27,15 +27,11 @@ export default class GalleryView extends ObserverObserverViewWithChildren<PhotoV
         this.children[i].activate();
       }
     }
-    GlobalScene._.canvas.style.width = '100%';
-    GlobalScene._.canvas.style.height = '100%';
     this.notionComponent.url = child.uuid;
     child.deactivate();
   }
   public activate(): void {
     super.activate();
-    GlobalScene._.canvas.style.width = '100%';
-    GlobalScene._.canvas.style.height = '100%';
   }
   private photoOrigin: TransformNode;
   constructor(private root: TransformNode, observer: Observer<GalleryView>) {

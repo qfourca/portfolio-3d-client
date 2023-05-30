@@ -1,5 +1,4 @@
 import { WebGPUEngine } from '@babylonjs/core';
-import { doc } from 'prettier';
 
 export default class Config implements RawConfig {
   private static instance: Config;

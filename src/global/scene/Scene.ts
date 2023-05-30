@@ -3,16 +3,22 @@ import {
   Engine,
   HighlightLayer,
   Mesh,
-  TransformNode,
 } from '@babylonjs/core';
 import BuildCanvas from './build/BuildCanvas';
 import BuildEngine from './build/BuildEngine';
 import BuildDebugUI from './build/BuildDebugUI';
 import CustomCamera from './Camera';
 import Init from './build/Init';
+import { doc } from 'prettier';
 
 export default class GlobalScene extends BABY_Scene {
   private static instance: GlobalScene;
+
+  public elements: {
+    root: HTMLElement;
+    app: HTMLElement;
+    notion: HTMLElement;
+  };
 
   public static async set(parent: HTMLElement) {
     const canvas = BuildCanvas.build(parent);
@@ -44,6 +50,11 @@ export default class GlobalScene extends BABY_Scene {
       isStroke: true,
     });
     this.camera = new CustomCamera(this);
+    this.elements = {
+      root: this.htmlroot,
+      app: document.getElementById('app')!,
+      notion: document.getElementById('notion')!,
+    };
   }
   public highlightLayer: HighlightLayer;
   public camera: CustomCamera;

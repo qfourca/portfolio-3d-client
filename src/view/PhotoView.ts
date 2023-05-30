@@ -1,5 +1,6 @@
 import {
   Mesh,
+  Scene,
   Texture,
   TransformNode,
   Vector2,
@@ -65,9 +66,13 @@ export default class PhotoView extends ObserverView {
     camera.smoothMove(new Vector3(x, y, z - 0.09), time);
     camera.smoothRotation(new Vector3(0, 0, 0), time);
 
-    const canvas = GlobalScene._.canvas.parentElement!;
-    canvas.style.transition = `${time}ms`;
-    canvas.style[Config._.wideDevice ? 'width' : 'height'] = '50%';
+    const { app, notion } = GlobalScene._.elements;
+    app.style.transition = `${time}ms`;
+    app.style[Config._.wideDevice ? 'width' : 'height'] = '50%';
+
+    // notion.style.transition = `${time}ms`;
+    // notion.style[Config._.wideDevice ? 'width' : 'height'] = '50%';
+    // notion.style.padding = '20px';
   }
 
   private static getNextposition(): Vector3 {

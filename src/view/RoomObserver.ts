@@ -1,5 +1,5 @@
 import GlobalScene from '$/global/scene/Scene';
-import { Mesh } from '@babylonjs/core';
+import { Mesh, Scene } from '@babylonjs/core';
 import BookShelfView from './BookShelfView';
 import Observer from './Observer';
 import SofaView from './SofaView';
@@ -33,5 +33,12 @@ export default class RoomObserver extends Observer<ObserverView> {
     galleryView.deactivate();
 
     this.views.push(galleryView);
+  }
+
+  public clickChild(view: ObserverView): void {
+    super.clickChild(view);
+    // GlobalScene._.elements.notion.style.width = '0%';
+    // GlobalScene._.elements.notion.style.padding = '0px';
+    GlobalScene._.elements.app.style.width = '100%';
   }
 }
