@@ -1,5 +1,6 @@
 import WheelRotate from '$/module/WheelRotate';
 import { Scene, UniversalCamera, Vector3 } from '@babylonjs/core';
+import GlobalScene from './Scene';
 
 export default class CustomCamera extends UniversalCamera {
   constructor(scene: Scene) {
@@ -11,7 +12,7 @@ export default class CustomCamera extends UniversalCamera {
     scene.registerBeforeRender(() => {
       this._update(scene.deltaTime);
     });
-    new WheelRotate(this, 0.001);
+    new WheelRotate(this, 0.001, document.getElementById('app')!);
   }
 
   private _update(time: number) {
