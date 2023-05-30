@@ -1,4 +1,5 @@
 import { WebGPUEngine } from '@babylonjs/core';
+import { doc } from 'prettier';
 
 export default class Config implements RawConfig {
   private static instance: Config;
@@ -33,6 +34,10 @@ export default class Config implements RawConfig {
   }
   get engine() {
     return this.config.engine;
+  }
+
+  get wideDevice() {
+    return window.screen.width / window.screen.height > 1;
   }
 }
 

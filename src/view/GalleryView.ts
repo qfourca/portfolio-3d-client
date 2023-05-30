@@ -8,8 +8,11 @@ import ObserverViewWithChildren, {
 } from './ObserverViewWithChildren';
 import api from '$/api/api';
 import PhotoView from './PhotoView';
+import NotionComponent from '$/util/Notion';
 
 export default class GalleryView extends ObserverObserverViewWithChildren<PhotoView> {
+  private notionComponent: NotionComponent;
+
   public click(): void {
     const camera = GlobalScene._.camera;
     const time =
@@ -26,6 +29,7 @@ export default class GalleryView extends ObserverObserverViewWithChildren<PhotoV
     }
     GlobalScene._.canvas.style.width = '100%';
     GlobalScene._.canvas.style.height = '100%';
+    this.notionComponent.url = child.uuid;
     child.deactivate();
   }
   public activate(): void {
@@ -37,6 +41,9 @@ export default class GalleryView extends ObserverObserverViewWithChildren<PhotoV
   constructor(private root: TransformNode, observer: Observer<GalleryView>) {
     super(root as Mesh, observer);
     this.photoOrigin = root.getChildTransformNodes()[0];
+    this.notionComponent = new NotionComponent(
+      document.getElementById('notion')!
+    );
     api
       .get<
         Array<{
@@ -52,6 +59,7 @@ export default class GalleryView extends ObserverObserverViewWithChildren<PhotoV
           this.children.push(
             new PhotoView(
               photoInfo.thumbnail,
+              photoInfo.uuid,
               this.photoOrigin,
               this.root,
               this

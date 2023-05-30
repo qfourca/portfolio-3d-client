@@ -4,6 +4,7 @@ import gltf from 'vite-plugin-gltf';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig(({ command, mode }) => {
+  // console.log(process.versions);
   return {
     assetsInclude: ['**/*.babylon'],
     plugins: [
@@ -16,7 +17,9 @@ export default defineConfig(({ command, mode }) => {
       tsconfigPaths(),
     ],
     define: {
-      __ISPRODUCTION__: mode !== 'development',
+      '__ISPRODUCTION__': mode !== 'development',
+      'process.env': process.env,
+      'process.versions': process.versions,
     },
     server: {
       /*here*/

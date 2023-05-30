@@ -9,6 +9,7 @@ import ObserverView from './ObserverView';
 import { CustomMaterial } from '@babylonjs/materials';
 import GlobalScene from '$/global/scene/Scene';
 import { Observable } from './Observer';
+import Config from '$/global/config/Config';
 
 export default class PhotoView extends ObserverView {
   private static photoFrames: Array<PhotoView> = new Array();
@@ -19,6 +20,7 @@ export default class PhotoView extends ObserverView {
 
   constructor(
     public thumbnail: string,
+    public uuid: string,
     original: TransformNode,
     parent: TransformNode,
     observer: Observable<PhotoView>
@@ -63,14 +65,9 @@ export default class PhotoView extends ObserverView {
     camera.smoothMove(new Vector3(x, y, z - 0.09), time);
     camera.smoothRotation(new Vector3(0, 0, 0), time);
 
-    const canvas = GlobalScene._.canvas;
+    const canvas = GlobalScene._.canvas.parentElement!;
     canvas.style.transition = `${time}ms`;
-    console.log(canvas.style.aspectRatio);
-    canvas.style[
-      document.body.offsetWidth / document.body.offsetHeight > 1
-        ? 'width'
-        : 'height'
-    ] = '50%';
+    canvas.style[Config._.wideDevice ? 'width' : 'height'] = '50%';
   }
 
   private static getNextposition(): Vector3 {
