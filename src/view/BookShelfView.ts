@@ -8,7 +8,7 @@ import api from '$/api/api';
 
 export default class BookShelfView extends ObserverViewWithChildren<BookView> {
   private bookOrigin: TransformNode;
-  constructor(private root: TransformNode, observer: Observer) {
+  constructor(private root: TransformNode, observer: Observer<BookShelfView>) {
     super(root.getChildMeshes(), observer, new Array());
     this.bookOrigin = root
       .getChildTransformNodes()

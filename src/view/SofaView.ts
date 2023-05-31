@@ -4,7 +4,7 @@ import ObserverView from './ObserverView';
 import Observer from './Observer';
 
 export default class SofaView extends ObserverView {
-  constructor(private root: Mesh, observer: Observer) {
+  constructor(private root: Mesh, observer: Observer<SofaView>) {
     super(root, observer);
   }
   public click(): void {

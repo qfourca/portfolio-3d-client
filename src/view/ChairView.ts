@@ -5,7 +5,7 @@ import ObserverView from './ObserverView';
 import Observer from './Observer';
 
 export default class ChairView extends ObserverView {
-  constructor(private root: TransformNode, observer: Observer) {
+  constructor(private root: TransformNode, observer: Observer<ChairView>) {
     const mesh = root.getChildMeshes();
     super(mesh as Array<Mesh>, observer);
   }
