@@ -37,8 +37,8 @@ export default class RoomObserver extends Observer<ObserverView> {
 
   public clickChild(view: ObserverView): void {
     super.clickChild(view);
-    // GlobalScene._.elements.notion.style.width = '0%';
-    // GlobalScene._.elements.notion.style.padding = '0px';
+
     GlobalScene._.elements.app.style.width = '100%';
+    GlobalScene._.elements.notion.style.zIndex = '-1';
   }
 }

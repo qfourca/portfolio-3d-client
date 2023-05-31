@@ -69,10 +69,9 @@ export default class PhotoView extends ObserverView {
     const { app, notion } = GlobalScene._.elements;
     app.style.transition = `${time}ms`;
     app.style[Config._.wideDevice ? 'width' : 'height'] = '50%';
-
-    // notion.style.transition = `${time}ms`;
-    // notion.style[Config._.wideDevice ? 'width' : 'height'] = '50%';
-    // notion.style.padding = '20px';
+    setTimeout(() => {
+      notion.style.zIndex = '999';
+    }, time);
   }
 
   private static getNextposition(): Vector3 {
