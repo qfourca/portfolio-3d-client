@@ -1,3 +1,4 @@
+import RoomView from '$/Interaction/RoomView';
 import Config, { RawConfig } from '$/global/config/Config';
 import Scene from '$/global/scene/Scene';
 import RoomObserver from '$/view/RoomObserver';
@@ -10,7 +11,8 @@ export default class App {
 
     await LoadScene();
 
-    new RoomObserver();
+    // new RoomObserver();
+    new RoomView();
   }
 
   public static run() {

@@ -67,23 +67,26 @@ export default abstract class InteractionImpl implements Interactable {
     );
   }
 
-  private _click() {
+  protected _click() {
     if (this.isActivate) {
+      this._out();
       this.click();
     }
   }
 
-  private _hover() {
+  protected _hover() {
     if (this.isActivate) {
       this.__execute__(this.targets, (mesh: Mesh) => {
         this.highlightLayer.addMesh(mesh, this.highlightColor);
       });
       this.actionManager.hoverCursor = 'pointer';
       this.hover();
+    } else {
+      this.actionManager.hoverCursor = 'default';
     }
   }
 
-  private _out() {
+  protected _out() {
     if (this.isActivate) {
       this.__execute__(this.targets, (mesh: Mesh) => {
         this.highlightLayer.removeMesh(mesh);

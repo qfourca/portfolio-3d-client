@@ -6,7 +6,10 @@ export default abstract class AbstractParent<T extends AbstractChild>
   extends AbstractView
   implements Parentable<T>
 {
-  clickchild(child: T): void {
+  appendChild(child: T): void {
+    throw new Error('Method not implemented.');
+  }
+  clickChild(child: T): void {
     this.activate();
   }
 }
