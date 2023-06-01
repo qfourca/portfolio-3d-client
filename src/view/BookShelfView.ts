@@ -23,20 +23,20 @@ export default class BookShelfView extends ObserverViewWithChildren<BookView> {
         }>
       >('/techstack/list')
       .then((res) => {
-        res.data.forEach((element) => {
-          this.children.push(
-            new BookView(
-              element.type,
-              element.icon,
-              element.title,
-              this.bookOrigin,
-              this.root
-            )
-          );
-        });
-        this.mesh = root.getChildMeshes();
-        this.activate();
-        this.bookOrigin.dispose();
+        // res.data.forEach((element) => {
+        //   this.children.push(
+        //     new BookView(
+        //       element.type,
+        //       element.icon,
+        //       element.title,
+        //       this.bookOrigin,
+        //       this.root
+        //     )
+        //   );
+        // });
+        // this.mesh = root.getChildMeshes();
+        // this.activate();
+        // this.bookOrigin.dispose();
       });
   }
 

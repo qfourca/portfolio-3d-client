@@ -1,5 +1,5 @@
 import GlobalScene from '$/global/scene/Scene';
-import MoveAble from '$/interface/MoveAble';
+import MoveAble from '$/interface/MoveAble2';
 import { Mesh, TransformNode, Vector3 } from '@babylonjs/core';
 import ObserverView from './ObserverView';
 import Observer from './Observer';

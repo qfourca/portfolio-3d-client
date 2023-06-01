@@ -2,5 +2,7 @@ import axios from 'axios';
 
 export default axios.create({
   timeout: 10000,
-  baseURL: 'https://notion.qfourca.net',
+  baseURL: __ISPRODUCTION__
+    ? 'https://notion.qfourca.net'
+    : 'http://localhost:8000',
 });
