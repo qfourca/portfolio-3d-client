@@ -2,7 +2,6 @@ import GlobalScene from '$/global/scene/Scene';
 import { Mesh, TransformNode, Vector2, Vector3 } from '@babylonjs/core';
 import AbstarctChild from './architecture/AbstarctChild';
 import AbstactChildParent from './architecture/AbstractChildParent';
-import AbstractParent from './architecture/AbstractParent';
 import Parentable from './architecture/Parentable';
 import api from '$/api/api';
 import PhotoView from './PhotoView';

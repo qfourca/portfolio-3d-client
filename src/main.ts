@@ -5,7 +5,7 @@ App.init(
     production: __ISPRODUCTION__,
     engine: 'webgl',
   },
-  document.getElementById('app')!
+  document.getElementById('root')!
 )
   .then(() => {
     App.run();

@@ -4,25 +4,21 @@ import {
   HighlightLayer,
   Mesh,
 } from '@babylonjs/core';
-import BuildCanvas from './build/BuildCanvas';
 import BuildEngine from './build/BuildEngine';
 import BuildDebugUI from './build/BuildDebugUI';
 import CustomCamera from './Camera';
 import Init from './build/Init';
+import UI from '../ui/UI';
 
 export default class GlobalScene extends BABY_Scene {
   private static instance: GlobalScene;
 
-  public elements: {
-    root: HTMLElement;
-    app: HTMLElement;
-    notion: HTMLElement;
-  };
+  private _ui: UI;
 
   public static async set(parent: HTMLElement) {
-    const canvas = BuildCanvas.build(parent);
-    const engine = await BuildEngine.build(canvas);
-    this.instance = new GlobalScene(engine);
+    const ui = new UI(parent);
+    const engine = await BuildEngine.build(ui.canvas);
+    this.instance = new GlobalScene(engine, ui);
     Init(this._);
     await BuildDebugUI.build(this._);
   }
@@ -30,18 +26,15 @@ export default class GlobalScene extends BABY_Scene {
   public get engine(): Engine {
     return this.getEngine();
   }
-  public get canvas(): HTMLCanvasElement {
-    return this.engine.getRenderingCanvas()!;
-  }
-  public get htmlroot(): HTMLElement {
-    return this.canvas.parentElement!;
+  public get ui(): UI {
+    return this._ui;
   }
   public get root(): Mesh {
     //@ts-expect-error
     return this.rootNodes.find(({ _isMesh }) => _isMesh);
   }
 
-  constructor(engine: Engine) {
+  constructor(engine: Engine, ui: UI) {
     super(engine);
     this.useRightHandedSystem = true;
     this.highlightLayer = new HighlightLayer('highlight_layer', this, {
@@ -49,11 +42,7 @@ export default class GlobalScene extends BABY_Scene {
       isStroke: true,
     });
     this.camera = new CustomCamera(this);
-    this.elements = {
-      root: this.htmlroot,
-      app: document.getElementById('app')!,
-      notion: document.getElementById('notion')!,
-    };
+    this._ui = ui;
   }
   public highlightLayer: HighlightLayer;
   public camera: CustomCamera;
