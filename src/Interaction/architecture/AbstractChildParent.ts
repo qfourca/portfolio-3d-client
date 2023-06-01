@@ -10,7 +10,5 @@ export default abstract class AbstactChildParent<T extends AbstarctChild>
   appendChild(child: T): void {
     this.children.push(child);
   }
-  clickChild(child: T): void {
-    this.activate();
-  }
+  abstract clickChild(child: T): void;
 }
