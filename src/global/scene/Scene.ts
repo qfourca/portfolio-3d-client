@@ -41,7 +41,7 @@ export default class GlobalScene extends BABY_Scene {
       mainTextureRatio: 1,
       isStroke: true,
     });
-    this.camera = new CustomCamera(this);
+    this.camera = new CustomCamera(this, ui.canvas);
     this._ui = ui;
   }
   public highlightLayer: HighlightLayer;

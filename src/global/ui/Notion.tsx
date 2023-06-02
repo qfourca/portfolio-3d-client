@@ -3,7 +3,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import ReactDOM, { Root } from 'react-dom/client';
 import { NotionRenderer } from 'react-notion-x';
-import 'react-notion/src/styles.css';
+import 'react-notion-x/src/styles.css';
+import 'katex/dist/katex.min.css';
 import { Dna } from 'react-loader-spinner';
 export default class NotionComponent {
   private reactRoot: Root;
@@ -49,7 +50,6 @@ export default class NotionComponent {
 
     return (
       <>
-        {' '}
         {response === null ? (
           <div
             style={{
@@ -70,7 +70,13 @@ export default class NotionComponent {
             />
           </div>
         ) : (
-          <NotionRenderer recordMap={response} fullPage={false} />
+          <>
+            <NotionRenderer
+              recordMap={response}
+              fullPage={false}
+              isImageZoomable={false}
+            />
+          </>
         )}
       </>
     );

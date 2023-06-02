@@ -3,7 +3,7 @@ import { Scene, UniversalCamera, Vector3 } from '@babylonjs/core';
 import GlobalScene from './Scene';
 
 export default class CustomCamera extends UniversalCamera {
-  constructor(scene: Scene) {
+  constructor(scene: Scene, wheelElement?: HTMLElement) {
     super('camera', new Vector3(0, 0.3, 0), scene);
     this.fov = 1.3;
     this.rotation.x += 0.3;
@@ -12,7 +12,7 @@ export default class CustomCamera extends UniversalCamera {
     scene.registerBeforeRender(() => {
       this._update(scene.deltaTime);
     });
-    new WheelRotate(this, 0.001, document.getElementById('app')!);
+    new WheelRotate(this, 0.001, wheelElement);
   }
 
   private _update(time: number) {
