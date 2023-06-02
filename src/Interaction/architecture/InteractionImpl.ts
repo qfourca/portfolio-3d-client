@@ -46,7 +46,9 @@ export default abstract class InteractionImpl implements Interactable {
     }
   }
   private setEvent(mesh: Mesh) {
-    mesh.actionManager = this.actionManager;
+    if (mesh.actionManager === null) {
+      mesh.actionManager = this.actionManager;
+    }
     mesh.actionManager.registerAction(
       new ExecuteCodeAction(
         ActionManager.OnPointerOverTrigger,

@@ -1,4 +1,4 @@
-import { Texture, TransformNode, Vector3 } from '@babylonjs/core';
+import { Mesh, Texture, TransformNode, Vector3 } from '@babylonjs/core';
 import AbstarctChild from './architecture/AbstarctChild';
 import GalleryView from './GalleryView';
 import GlobalScene from '$/global/scene/Scene';
@@ -7,8 +7,9 @@ import OpenNotionPage from '$/logic/OpenNotionPage';
 
 export default class PhotoView extends AbstarctChild {
   private photo: TransformNode;
+  public meshs: Array<Mesh>;
   constructor(
-    private thumbnail: string,
+    thumbnail: string,
     private uuid: string,
     position: Vector3,
     private gallery: GalleryView
@@ -16,7 +17,8 @@ export default class PhotoView extends AbstarctChild {
     const photo = gallery.originalPhoto.clone(uuid, gallery.wall)!;
     photo.position = position.clone();
 
-    const picture = photo.getChildMeshes()[0];
+    const meshs = photo.getChildMeshes() as Array<Mesh>;
+    const picture = meshs[0];
 
     const iconMaterial = new CustomMaterial(uuid + 'icon', GlobalScene._);
 
@@ -30,8 +32,9 @@ export default class PhotoView extends AbstarctChild {
     picture.material = iconMaterial;
     picture.rotation = new Vector3(-Math.PI / 2, 0, 0);
 
-    super(photo.getChildMeshes(), gallery);
+    super(meshs, gallery);
     this.photo = photo;
+    this.meshs = meshs;
   }
 
   public click(): void {
@@ -45,5 +48,7 @@ export default class PhotoView extends AbstarctChild {
     camera.smoothRotation(new Vector3(0, 0, 0), time);
 
     new OpenNotionPage().open(time, this.uuid);
+
+    this.gallery.deactivate();
   }
 }

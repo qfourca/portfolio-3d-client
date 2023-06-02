@@ -6,7 +6,7 @@ import Parentable from './architecture/Parentable';
 import api from '$/api/api';
 import PhotoView from './PhotoView';
 
-export default class GalleryView extends AbstactChildParent<AbstarctChild> {
+export default class GalleryView extends AbstactChildParent<PhotoView> {
   private static rootPosition: Vector3 = new Vector3(0.7, 0.6, -1);
   private static photoSize: Vector2 = new Vector2(-0.3, -0.5);
 
@@ -37,7 +37,10 @@ export default class GalleryView extends AbstactChildParent<AbstarctChild> {
           );
         });
         this.originalPhoto.dispose();
-        this.children.forEach((child) => child.activate());
+        this.children.forEach((child) => {
+          if (!this.isActivate) child.activate();
+          this.addTarget(child.meshs);
+        });
       });
   }
   public click(): void {
@@ -54,7 +57,9 @@ export default class GalleryView extends AbstactChildParent<AbstarctChild> {
   public clickChild(child: AbstarctChild): void {
     this.children.forEach((child) => child.activate());
     child.deactivate();
-    this.activate();
+    setTimeout(() => {
+      this.activate();
+    }, 300);
   }
 
   public nextPhotoPosition() {
