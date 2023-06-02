@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import ReactDOM, { Root } from 'react-dom/client';
 import { NotionRenderer } from 'react-notion-x';
 import 'react-notion-x/src/styles.css';
-import 'katex/dist/katex.min.css';
 import { Dna } from 'react-loader-spinner';
 export default class NotionComponent {
   private reactRoot: Root;
