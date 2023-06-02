@@ -8,6 +8,22 @@ import { Dna } from 'react-loader-spinner';
 export default class NotionComponent {
   private reactRoot: Root;
   private _url: string = '';
+  private defaultZindex: string;
+  public open(time: number) {
+    this.element.style.transition = time + 'ms';
+    this.element.style.width = '50%';
+    setTimeout(() => {
+      this.element.style.zIndex = '999';
+    }, time);
+  }
+  public close(time: number) {
+    this.url = '';
+    this.element.style.transition = time + 'ms';
+    this.element.style.width = '0%';
+    setTimeout(() => {
+      this.element.style.zIndex = this.defaultZindex;
+    }, time);
+  }
   public set url(url: string) {
     this._url = url;
     this.reactRoot.render(<NotionComponent.ReactNotion url={this._url} />);
@@ -17,15 +33,18 @@ export default class NotionComponent {
   }
   constructor(public element: HTMLElement) {
     this.reactRoot = ReactDOM.createRoot(element);
+    this.defaultZindex = element.style.zIndex;
   }
 
   private static ReactNotion(props: { url: string }) {
     const [response, setResponse] = useState<any | null>(null);
     useEffect(() => {
       setResponse(null);
-      api.get(`/notion/page?page=${props.url}`).then((data) => {
-        setResponse(data.data);
-      });
+      if (props.url != '') {
+        api.get(`/notion/page?page=${props.url}`).then((data) => {
+          setResponse(data.data);
+        });
+      }
     }, [props.url]);
 
     return (

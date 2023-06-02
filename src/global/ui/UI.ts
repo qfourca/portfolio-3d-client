@@ -1,12 +1,15 @@
+import NotionComponent from './Notion';
+
 export default class UI {
   public root: HTMLElement;
   public app: HTMLDivElement;
   public canvas: HTMLCanvasElement;
-  //   public notion: HTMLElement;
+  public notion: NotionComponent;
   constructor(root: HTMLElement) {
     this.root = root;
     this.app = this.makeApp();
     this.canvas = this.makeCanvas();
+    this.notion = new NotionComponent(this.makeNotionRoot());
   }
 
   private makeApp() {
@@ -26,5 +29,19 @@ export default class UI {
     canvas.style.outline = 'none';
     this.app.appendChild(canvas);
     return canvas;
+  }
+
+  private makeNotionRoot() {
+    const element = document.createElement('div');
+    this.root.appendChild(element);
+    element.style.width = '0%';
+    element.style.maxHeight = '100%';
+    element.style.overflow = 'scroll';
+    element.style.padding = '20px';
+    element.style.position = 'absolute';
+    element.style.boxSizing = 'border-box';
+    element.style.right = '0px';
+    element.style.zIndex = '-1';
+    return element;
   }
 }

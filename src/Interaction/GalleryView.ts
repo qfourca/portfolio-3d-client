@@ -46,6 +46,9 @@ export default class GalleryView extends AbstactChildParent<AbstarctChild> {
       Vector3.Distance(camera.position, new Vector3(0, 0.3, 0)) * 2000;
     camera.smoothMove(new Vector3(0, 0.3, 0), time);
     camera.smoothRotation(new Vector3(0.3, 0, 0), time);
+    this.children.forEach((child) => {
+      child.activate();
+    });
   }
 
   public clickChild(child: AbstarctChild): void {

@@ -5,6 +5,7 @@ import AbstarctChild from './architecture/AbstarctChild';
 import Parentable from './architecture/Parentable';
 import ChairView from './ChairView';
 import GalleryView from './GalleryView';
+import CloseNotionPage from '$/logic/CloseNotionPage';
 
 export default class RoomView implements Parentable<AbstarctChild> {
   private children: Array<AbstarctChild> = new Array();
@@ -35,5 +36,6 @@ export default class RoomView implements Parentable<AbstarctChild> {
       child.activate();
     });
     child.deactivate();
+    new CloseNotionPage().close(300);
   }
 }

@@ -3,6 +3,7 @@ import AbstarctChild from './architecture/AbstarctChild';
 import GalleryView from './GalleryView';
 import GlobalScene from '$/global/scene/Scene';
 import { CustomMaterial } from '@babylonjs/materials';
+import OpenNotionPage from '$/logic/OpenNotionPage';
 
 export default class PhotoView extends AbstarctChild {
   private photo: TransformNode;
@@ -42,5 +43,7 @@ export default class PhotoView extends AbstarctChild {
     const { x, y, z } = this.photo.getAbsolutePosition();
     camera.smoothMove(new Vector3(x, y, z - 0.09), time);
     camera.smoothRotation(new Vector3(0, 0, 0), time);
+
+    new OpenNotionPage().open(time, this.uuid);
   }
 }
