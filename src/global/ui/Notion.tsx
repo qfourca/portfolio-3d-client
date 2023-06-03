@@ -5,21 +5,34 @@ import ReactDOM, { Root } from 'react-dom/client';
 import { NotionRenderer } from 'react-notion-x';
 import 'react-notion-x/src/styles.css';
 import { Dna } from 'react-loader-spinner';
+import Config from '../config/Config';
 export default class NotionComponent {
   private reactRoot: Root;
   private _url: string = '';
   private defaultZindex: string;
+  private isOpenWidth: boolean = true;
   public open(time: number) {
     this.element.style.transition = time + 'ms';
-    this.element.style.width = '50%';
+    if (Config._.wideDevice) {
+      this.element.style.width = '50%';
+    } else {
+      this.element.style.height = '50%';
+      this.element.style.width = '100%';
+    }
+    this.isOpenWidth = Config._.wideDevice;
     setTimeout(() => {
       this.element.style.zIndex = '999';
     }, time);
   }
   public close(time: number) {
     this.url = '';
-    this.element.style.transition = time + 'ms';
-    this.element.style.width = '0%';
+    if (this.isOpenWidth) {
+      this.element.style.transition = time + 'ms';
+      this.element.style.width = '0%';
+    } else {
+      this.element.style.height = '0%';
+    }
+
     setTimeout(() => {
       this.element.style.zIndex = this.defaultZindex;
     }, time);
@@ -53,7 +66,7 @@ export default class NotionComponent {
           <div
             style={{
               width: '100%',
-              height: 'calc(100vh - 40px)',
+              height: '100%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

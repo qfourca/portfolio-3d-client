@@ -5,6 +5,7 @@ export default class CloseNotionPage {
   close(time: number) {
     GlobalScene._.ui.app.style.transition = time + 'ms';
     GlobalScene._.ui.app.style.width = '100%';
+    GlobalScene._.ui.app.style.height = '100%';
     GlobalScene._.ui.notion.close(time);
   }
 }

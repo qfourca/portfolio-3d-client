@@ -41,7 +41,8 @@ export default class UI {
     element.style.padding = '20px';
     element.style.position = 'absolute';
     element.style.boxSizing = 'border-box';
-    element.style.right = '0px';
+    element.style.right = '0';
+    element.style.bottom = '0';
     element.style.zIndex = '-1';
     return element;
   }
