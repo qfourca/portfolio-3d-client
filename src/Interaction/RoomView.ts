@@ -6,6 +6,7 @@ import Parentable from './architecture/Parentable';
 import ChairView from './ChairView';
 import GalleryView from './GalleryView';
 import CloseNotionPage from '$/logic/CloseNotionPage';
+import BookshelfView from './BookshelfView';
 
 export default class RoomView implements Parentable<AbstarctChild> {
   private children: Array<AbstarctChild> = new Array();
@@ -16,13 +17,17 @@ export default class RoomView implements Parentable<AbstarctChild> {
     this.appendChild(
       new ChairView(GlobalScene._.getTransformNodeByName('Chair')!, this)
     );
-
+    this.appendChild(
+      new BookshelfView(
+        GlobalScene._.getTransformNodeByName('BookShelf')!,
+        this
+      )
+    );
     const gallery = new GalleryView(
       GlobalScene._.getMeshByName('Wall3') as Mesh,
       this
     );
     this.appendChild(gallery);
-
     gallery.click();
     this.clickChild(gallery);
   }

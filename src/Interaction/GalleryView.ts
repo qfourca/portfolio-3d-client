@@ -14,7 +14,6 @@ export default class GalleryView extends AbstactChildParent<PhotoView> {
   constructor(public wall: Mesh, parent: Parentable<AbstarctChild>) {
     super(wall, parent);
     this.originalPhoto = wall.getChildTransformNodes()[0];
-
     api
       .get<
         Array<{

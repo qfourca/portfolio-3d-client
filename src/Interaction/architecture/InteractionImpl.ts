@@ -13,7 +13,7 @@ export default abstract class InteractionImpl implements Interactable {
   public isHover: boolean = false;
   public isActivate: boolean = false;
   public highlightColor: Color3 = Color3.Green();
-  private targets: Array<Mesh> = new Array();
+  protected targets: Array<Mesh> = new Array();
   private highlightLayer: HighlightLayer;
   protected actionManager: ActionManager = new ActionManager();
 
