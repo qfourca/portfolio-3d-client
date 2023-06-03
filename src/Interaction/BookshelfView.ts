@@ -17,29 +17,29 @@ export default class BookshelfView extends AbstactChildParent<BookView> {
     super(bookshelf.getChildren()[1] as Mesh, parent);
     this.originalBook = bookshelf.getChildren()[0] as TransformNode;
 
-    // api
-    //   .get<
-    //     Array<{
-    //       icon: string;
-    //       title: string;
-    //       type: bookType;
-    //       uuid: string;
-    //     }>
-    //   >('/techstack/list')
-    //   .then((res) => {
-    //     res.data.forEach((element) => {
-    //       const bookView = new BookView(
-    //         element.type,
-    //         element.icon,
-    //         element.title,
-    //         this
-    //       );
-    //       this.children.push(bookView);
-    //       this.addTarget(bookView.meshs);
-    //     });
-    //     this.activate();
-    //     this.originalBook.dispose();
-    //   });
+    api
+      .get<
+        Array<{
+          icon: string;
+          title: string;
+          type: bookType;
+          uuid: string;
+        }>
+      >('/techstack/list')
+      .then((res) => {
+        res.data.forEach((element) => {
+          const bookView = new BookView(
+            element.type,
+            element.icon,
+            element.title,
+            this
+          );
+          this.children.push(bookView);
+          this.addTarget(bookView.meshs);
+        });
+        this.activate();
+        this.originalBook.dispose();
+      });
   }
   public click(): void {
     const camera = GlobalScene._.camera;
