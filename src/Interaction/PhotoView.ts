@@ -21,8 +21,22 @@ export default class PhotoView extends AbstarctChild {
     const picture = meshs[0];
 
     const iconMaterial = new CustomMaterial(uuid + 'icon', GlobalScene._);
+    const texture = new Texture(
+      thumbnail,
+      null,
+      undefined,
+      undefined,
+      undefined,
+      () => {
+        const { width, height } = texture.getSize();
+        const ratio = width / height;
+        photo.scaling = photo.scaling.multiply(
+          ratio > 1 ? new Vector3(1, 1 / ratio, 1) : new Vector3(ratio, 1, 1)
+        );
+      }
+    );
 
-    iconMaterial.diffuseTexture = new Texture(thumbnail);
+    iconMaterial.diffuseTexture = texture;
     iconMaterial.diffuseTexture.hasAlpha = false;
     iconMaterial.Fragment_Custom_Diffuse(`
       baseColor.rgb = mix(vec3(1.), baseColor.rgb, baseColor.a);
@@ -44,7 +58,7 @@ export default class PhotoView extends AbstarctChild {
       2000;
 
     const { x, y, z } = this.photo.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x, y, z - 0.09), time);
+    camera.smoothMove(new Vector3(x, y, z - 0.075), time);
     camera.smoothRotation(new Vector3(0, 0, 0), time);
 
     new OpenNotionPage().open(time, this.uuid);

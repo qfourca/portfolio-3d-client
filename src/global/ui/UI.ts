@@ -36,6 +36,7 @@ export default class UI {
     this.root.appendChild(element);
     element.style.width = '0%';
     element.style.maxHeight = '100%';
+    element.style.height = '100%';
     element.style.overflowY = 'scroll';
     // element.style.overflowX = "";
     element.style.padding = '20px';

@@ -1,5 +1,5 @@
 import { Mesh, SceneLoader, Vector3 } from '@babylonjs/core';
-import room_model from '$static/room2.glb';
+import room_model from '$static/room.glb';
 import GlobalScene from '$/global/scene/Scene';
 
 export default async () => {

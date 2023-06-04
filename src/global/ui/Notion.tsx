@@ -54,8 +54,9 @@ export default class NotionComponent {
     useEffect(() => {
       setResponse(null);
       if (props.url != '') {
-        api.get(`/notion/page?page=${props.url}`).then((data) => {
-          setResponse(data.data);
+        api.get(`/notion/page?page=${props.url}`).then(({ data }) => {
+          setResponse(data);
+          console.log(data);
         });
       }
     }, [props.url]);
