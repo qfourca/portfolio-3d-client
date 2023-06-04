@@ -6,7 +6,7 @@ import AbstactChildParent from '../architecture/AbstractChildParent';
 import EmailMornitorView from './EmailMornitorView';
 import NotionMornitorView from './NotionMornitorView';
 import GithubMornitorView from './GithubMornitorView';
-import CellphoneView from './CellPhoneView';
+import CellphoneView from './CellphoneView';
 
 export default class ChairView extends AbstactChildParent<AbstarctChild> {
   constructor(private chair: TransformNode, parent: Parentable<AbstarctChild>) {
