@@ -5,6 +5,7 @@ import {
   HighlightLayer,
   Mesh,
   Scene,
+  TransformNode,
 } from '@babylonjs/core';
 import Interactable, { InteractableTarget } from './Interactable';
 import GlobalScene from '$/global/scene/Scene';
@@ -38,8 +39,13 @@ export default abstract class InteractionImpl implements Interactable {
         target.forEach((target) => {
           callback(target);
         });
-      } else {
+      } else if (target instanceof Mesh) {
         callback(target);
+      } else {
+        //@ts-expect-error
+        target.getChildMeshes().forEach((target: Mesh) => {
+          callback(target);
+        });
       }
     } else {
       this.targets.forEach((mesh) => callback(mesh));
@@ -73,6 +79,10 @@ export default abstract class InteractionImpl implements Interactable {
     if (this.isActivate) {
       this._out();
       this.click();
+      // this.isActivate = false;
+      // setTimeout(() => {
+      //   this.isActivate = true;
+      // }, 1);
     }
   }
 

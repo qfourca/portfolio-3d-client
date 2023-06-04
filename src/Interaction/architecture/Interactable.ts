@@ -1,7 +1,7 @@
 import Activatable from '$/interface/Activatable';
 import Clickable from '$/interface/Clickable';
 import Hoverable from '$/interface/Hoverable';
-import { Color3, Mesh } from '@babylonjs/core';
+import { Color3, Mesh, TransformNode } from '@babylonjs/core';
 
 export default interface Interactable
   extends Activatable,
@@ -11,4 +11,4 @@ export default interface Interactable
   addTarget(target: InteractableTarget): void;
 }
 
-export type InteractableTarget = Mesh | Array<Mesh>;
+export type InteractableTarget = Mesh | Array<Mesh> | TransformNode;

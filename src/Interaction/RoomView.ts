@@ -3,10 +3,10 @@ import SofaView from './SofaView';
 import { Mesh, ThinEngine } from '@babylonjs/core';
 import AbstarctChild from './architecture/AbstarctChild';
 import Parentable from './architecture/Parentable';
-import ChairView from './ChairView';
-import GalleryView from './GalleryView';
+import ChairView from './chair/ChairView';
+import GalleryView from './gallery/GalleryView';
 import CloseNotionPage from '$/logic/CloseNotionPage';
-import BookshelfView from './BookshelfView';
+import BookshelfView from './bookshelf/BookshelfView';
 
 export default class RoomView implements Parentable<AbstarctChild> {
   private children: Array<AbstarctChild> = new Array();
