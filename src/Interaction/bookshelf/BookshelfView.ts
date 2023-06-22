@@ -17,41 +17,39 @@ export default class BookshelfView extends AbstactChildParent<BookView> {
     super(bookshelf.getChildren()[1] as Mesh, parent);
     this.originalBook = bookshelf.getChildren()[0] as TransformNode;
 
-    if (__ISPRODUCTION__) {
-      api
-        .get<
-          Array<{
-            icon: string;
-            title: string;
-            type: bookType;
-            uuid: string;
-          }>
-        >('/techstack/list')
-        .then((res) => {
-          res.data.forEach((element) => {
-            const bookView = new BookView(
-              element.type,
-              element.icon,
-              element.title,
-              this
-            );
-            this.children.push(bookView);
-            this.addTarget(bookView.meshs);
-          });
-          this.activate();
-          this.originalBook.dispose();
+    api
+      .get<
+        Array<{
+          icon: string;
+          title: string;
+          type: bookType;
+          uuid: string;
+        }>
+      >('/techstack/list')
+      .then((res) => {
+        res.data.forEach((element) => {
+          const bookView = new BookView(
+            element.type,
+            element.icon,
+            element.title,
+            this
+          );
+          this.children.push(bookView);
+          this.addTarget(bookView.meshs);
         });
-    }
+        this.activate();
+        this.originalBook.dispose();
+      });
   }
   public click(): void {
     const camera = GlobalScene._.camera;
     const time =
       Vector3.Distance(camera.position, this.bookshelf.getAbsolutePosition()) *
-      2000;
+      200;
 
     const { x, y, z } = this.bookshelf.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x + 0.2, y, z), time);
-    camera.smoothRotation(new Vector3(0.2, -Math.PI / 2, 0), time);
+    camera.smoothMove(new Vector3(x, y, z + 2), time);
+    camera.smoothRotation(new Vector3(0.2, Math.PI, 0), time);
 
     this.children.forEach((child) => child.activate());
   }

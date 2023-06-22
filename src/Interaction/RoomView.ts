@@ -12,24 +12,25 @@ export default class RoomView implements Parentable<AbstarctChild> {
   private children: Array<AbstarctChild> = new Array();
   constructor() {
     this.appendChild(
-      new SofaView(GlobalScene._.getMeshByName('Sofa') as Mesh, this)
+      new SofaView(GlobalScene._.getTransformNodeByName('Sofa')!, this)
     );
-    this.appendChild(
-      new ChairView(GlobalScene._.getTransformNodeByName('Chair')!, this)
-    );
+    // console.log();
+    // this.appendChild(
+    //   new ChairView(GlobalScene._.getTransformNodeByName('Chair')!, this)
+    // );
     this.appendChild(
       new BookshelfView(
         GlobalScene._.getTransformNodeByName('BookShelf')!,
         this
       )
     );
-    const gallery = new GalleryView(
-      GlobalScene._.getMeshByName('Wall3') as Mesh,
-      this
-    );
-    this.appendChild(gallery);
-    gallery.click();
-    this.clickChild(gallery);
+    // const gallery = new GalleryView(
+    //   GlobalScene._.getMeshByName('Wall3') as Mesh,
+    //   this
+    // );
+    // this.appendChild(gallery);
+    // gallery.click();
+    // this.clickChild(gallery);
   }
   appendChild(child: AbstarctChild): void {
     this.children.push(child);

@@ -26,10 +26,10 @@ export default class BookTagModule {
   ) {
     const nameTag = this.buildNameTag();
     nameTag.rotation.set(Math.PI / 2, 0, 0);
-    nameTag.position = position.add(new Vector3(0, -50, 0));
+    nameTag.position = position.add(new Vector3(0, -50, -50));
     const iconMesh = this.buildBookIcon();
     iconMesh.rotation.set(-Math.PI / 2, Math.PI / 2, Math.PI / 2);
-    iconMesh.position = position.add(new Vector3(0, 100, 0));
+    iconMesh.position = position.add(new Vector3(0, 100, -50));
   }
 
   private buildNameTag(): Mesh {

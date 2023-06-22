@@ -1,5 +1,8 @@
 import {
   Color3,
+  DynamicTexture,
+  Material,
+  PBRMaterial,
   StandardMaterial,
   TransformNode,
   Vector3,
@@ -19,8 +22,8 @@ export default class BookView extends AbstarctChild {
     const book = parent.originalBook.clone(title, parent.bookshelf)!;
     const floor = BookView.typeToFloor(type);
     book.position.set(
-      3,
-      17 - floor * 31.5,
+      -10,
+      23 - floor * 27,
       110 - parent.getCountBooks(floor) * 20
     );
 
@@ -28,13 +31,34 @@ export default class BookView extends AbstarctChild {
       .getChildMeshes()
       .find(({ name }) => name === book.name + '.BookCover');
 
-    let material = BookView.bookCoverMaterial.get(type);
-    if (!material) {
-      material = new StandardMaterial(type + 'bookCoverMaterial');
-      material.diffuseColor = Color3.FromHexString(BookView.typeToColor(type));
-      BookView.bookCoverMaterial.set(type, material);
+    if (BookView.bookCoverMaterial.size == 0) {
+      ['tool', 'language', 'etc', 'framework', 'library'].forEach(
+        //@ts-expect-error
+        (type: bookType) => {
+          const texture = new DynamicTexture(
+            type + 'nameTexture',
+            {
+              width: 4,
+              height: 4,
+            },
+            null,
+            undefined,
+            undefined,
+            undefined,
+            false
+          );
+          const canvasMaterial = new StandardMaterial(type + 'nameMaterial');
+          canvasMaterial.diffuseTexture = texture;
+          const textureContext = texture.getContext();
+          textureContext.fillStyle = BookView.typeToColor(type);
+          textureContext.fillRect(0, 0, 4, 4);
+          texture.update(false);
+          BookView.bookCoverMaterial.set(type, canvasMaterial);
+        }
+      );
     }
-    bookCover!.material = material;
+
+    bookCover!.material = BookView.bookCoverMaterial.get(type)!;
 
     const bookTag = new BookTagModule(
       title,
