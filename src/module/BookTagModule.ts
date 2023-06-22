@@ -56,6 +56,7 @@ export default class BookTagModule {
       this.name + 'nameMaterial',
       GlobalScene._
     );
+    canvasMaterial.specularPower = 120;
     canvasMaterial.diffuseTexture = texture;
 
     nameMesh.material = canvasMaterial;
@@ -86,7 +87,7 @@ export default class BookTagModule {
     });
     iconMesh.parent = this.parent;
     const iconMaterial = new CustomMaterial(this.name + 'icon', GlobalScene._);
-
+    iconMaterial.specularPower = 120;
     iconMaterial.diffuseTexture = new Texture(this.icon);
     iconMaterial.diffuseTexture.hasAlpha = false;
     iconMaterial.Fragment_Custom_Diffuse(`

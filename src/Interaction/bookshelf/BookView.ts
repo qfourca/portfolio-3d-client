@@ -53,6 +53,7 @@ export default class BookView extends AbstarctChild {
           textureContext.fillStyle = BookView.typeToColor(type);
           textureContext.fillRect(0, 0, 4, 4);
           texture.update(false);
+          canvasMaterial.specularPower = 120;
           BookView.bookCoverMaterial.set(type, canvasMaterial);
         }
       );

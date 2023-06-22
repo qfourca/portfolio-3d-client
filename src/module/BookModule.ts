@@ -29,14 +29,6 @@ export default class BookMoule extends MoveAble {
       .getChildMeshes()
       .find(({ name }) => name === book.name + '.BookCover');
 
-    let material = BookMoule.bookCoverMaterial.get(type);
-    if (!material) {
-      material = new StandardMaterial(type + 'bookCoverMaterial');
-      material.diffuseColor = Color3.FromHexString(BookMoule.typeToColor(type));
-      BookMoule.bookCoverMaterial.set(type, material);
-    }
-    bookCover!.material = material;
-
     const bookTag = new BookTagModule(
       title,
       icon,
