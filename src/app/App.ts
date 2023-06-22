@@ -11,7 +11,7 @@ export default class App {
     await LoadScene();
 
     // new RoomObserver();
-    new RoomView();
+    // new RoomView();
   }
 
   public static run() {
