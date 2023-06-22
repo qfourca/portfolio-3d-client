@@ -1,6 +1,6 @@
 import { Mesh, SceneLoader, ShadowGenerator, SpotLight } from '@babylonjs/core';
 import GlobalScene from '$/global/scene/Scene';
-import room_model from '../../static/ybh.glb';
+import room_model from '../../static/room.glb';
 
 export default async () => {
   const load = await SceneLoader.AppendAsync('', room_model, GlobalScene._);
