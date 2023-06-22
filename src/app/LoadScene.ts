@@ -28,7 +28,6 @@ export default async () => {
   //@ts-expect-error
   load.meshes.forEach((mesh: Mesh) => {
     mesh.receiveShadows = true;
-    console.log(mesh.name);
     shadowGenerator.addShadowCaster(mesh, false);
   });
   shadowGenerator.removeShadowCaster(load.getMeshByName('평면')!);
