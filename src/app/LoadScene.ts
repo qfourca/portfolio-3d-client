@@ -5,7 +5,7 @@ import {
   SpotLight,
   Vector3,
 } from '@babylonjs/core';
-import room_model from '$static/room3.glb';
+import room_model from '$static/room4.glb';
 import GlobalScene from '$/global/scene/Scene';
 
 export default async () => {
@@ -30,6 +30,5 @@ export default async () => {
     mesh.receiveShadows = true;
     shadowGenerator.addShadowCaster(mesh, false);
   });
-  shadowGenerator.removeShadowCaster(load.getMeshByName('평면')!);
   return load;
 };
