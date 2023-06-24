@@ -10,7 +10,6 @@ export default class WheelRotate {
     private isMobile: boolean,
     private element?: HTMLElement
   ) {
-    console.log(isMobile);
     if (isMobile) {
       let startTouch: number = 0;
       const targetElement = element ?? window;

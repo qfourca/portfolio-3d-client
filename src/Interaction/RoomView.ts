@@ -17,15 +17,20 @@ export default class RoomView implements Parentable<AbstarctChild> {
     this.appendChild(
       new ChairView(GlobalScene._.getTransformNodeByName('Chair')!, this)
     );
-    this.appendChild(
-      new BookshelfView(
-        GlobalScene._.getTransformNodeByName('BookShelf')!,
-        this
-      )
-    );
-    this.appendChild(
-      new GalleryView(GlobalScene._.getMeshByName('GalleryWall') as Mesh, this)
-    );
+    if (true) {
+      this.appendChild(
+        new BookshelfView(
+          GlobalScene._.getTransformNodeByName('BookShelf')!,
+          this
+        )
+      );
+      this.appendChild(
+        new GalleryView(
+          GlobalScene._.getMeshByName('GalleryWall') as Mesh,
+          this
+        )
+      );
+    }
   }
   appendChild(child: AbstarctChild): void {
     this.children.push(child);

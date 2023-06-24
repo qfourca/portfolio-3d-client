@@ -1,7 +1,7 @@
 import App from './app/App';
 App.init(
   {
-    debugUI: true,
+    debugUI: false,
     production: __ISPRODUCTION__,
     engine: 'webgl',
   },
@@ -11,7 +11,7 @@ App.init(
     App.run();
   })
   .catch((error) => {
-    console.log(error);
+    console.error(error);
   });
 
 declare global {
