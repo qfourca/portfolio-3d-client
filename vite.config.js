@@ -17,9 +17,7 @@ export default defineConfig(({ command, mode }) => {
       tsconfigPaths(),
     ],
     define: {
-      '__ISPRODUCTION__': mode !== 'development',
-      'process.env': process.env,
-      'process.versions': process.versions,
+      __ISPRODUCTION__: mode !== 'development',
     },
     server: {
       /*here*/

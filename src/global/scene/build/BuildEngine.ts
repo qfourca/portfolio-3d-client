@@ -1,13 +1,13 @@
 import Config from '$/global/config/Config';
-import { WebGPUEngine } from '@babylonjs/core/Engines/webgpuEngine';
-import { Engine } from '@babylonjs/core/Engines/engine';
-
+import { WebGPUEngine, Engine } from '@babylonjs/core';
 export default class BuildEngine {
+  private static dynamicWebGPULoader = [];
   public static async build(canvas: HTMLCanvasElement) {
     let engine: Engine;
     if (Config._.engine == 'webgpu') {
-      engine = new WebGPUEngine(canvas);
-      await (engine as WebGPUEngine).initAsync();
+      const wgpuEngine = new WebGPUEngine(canvas);
+      await wgpuEngine.initAsync();
+      engine = wgpuEngine;
     } else {
       engine = new Engine(canvas);
     }
