@@ -4,6 +4,7 @@ App.init(
     debugUI: false,
     production: __ISPRODUCTION__,
     engine: 'webgl',
+    AWS: true,
   },
   document.getElementById('root')!
 )

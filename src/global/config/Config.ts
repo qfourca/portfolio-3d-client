@@ -34,6 +34,9 @@ export default class Config implements RawConfig {
   get engine() {
     return this.config.engine;
   }
+  get AWS() {
+    return this.production ? true : this.config.AWS;
+  }
   get wideDevice() {
     return window.screen.width / window.screen.height > 1;
   }
@@ -55,5 +58,6 @@ export default class Config implements RawConfig {
 export interface RawConfig {
   production: boolean;
   debugUI: boolean;
+  AWS: boolean;
   engine?: 'webgl' | 'webgpu';
 }

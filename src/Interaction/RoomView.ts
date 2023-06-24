@@ -7,6 +7,8 @@ import ChairView from './chair/ChairView';
 import GalleryView from './gallery/GalleryView';
 import CloseNotionPage from '$/logic/CloseNotionPage';
 import BookshelfView from './bookshelf/BookshelfView';
+import Config from '$/global/config/Config';
+import DoorView from './DoorView';
 
 export default class RoomView implements Parentable<AbstarctChild> {
   private children: Array<AbstarctChild> = new Array();
@@ -17,7 +19,8 @@ export default class RoomView implements Parentable<AbstarctChild> {
     this.appendChild(
       new ChairView(GlobalScene._.getTransformNodeByName('Chair')!, this)
     );
-    if (true) {
+
+    if (Config._.AWS) {
       this.appendChild(
         new BookshelfView(
           GlobalScene._.getTransformNodeByName('BookShelf')!,
@@ -31,6 +34,9 @@ export default class RoomView implements Parentable<AbstarctChild> {
         )
       );
     }
+    const doorView = new DoorView(GlobalScene._.getMeshByName('Door')!, this);
+    this.appendChild(doorView);
+    doorView.click(true);
   }
   appendChild(child: AbstarctChild): void {
     this.children.push(child);
