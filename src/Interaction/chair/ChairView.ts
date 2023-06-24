@@ -30,12 +30,11 @@ export default class ChairView extends AbstactChildParent<AbstarctChild> {
   click(): void {
     const camera = GlobalScene._.camera;
     const time =
-      Vector3.Distance(camera.position, this.chair.getAbsolutePosition()) *
-      2000;
+      Vector3.Distance(camera.position, this.chair.getAbsolutePosition()) * 300;
 
     const { x, y, z } = this.chair.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x + 0.03, y + 0.18, z), time);
-    camera.smoothRotation(new Vector3(0.1, -Math.PI / 2, 0), time);
+    camera.smoothMove(new Vector3(x, y + 1.5, z + 0.4), time);
+    camera.smoothRotation(new Vector3(0.3, Math.PI, 0), time);
   }
   activate(): void {
     super.activate();

@@ -1,4 +1,4 @@
-import { Mesh, Texture, TransformNode, Vector3 } from '@babylonjs/core';
+import { Color3, Mesh, Texture, TransformNode, Vector3 } from '@babylonjs/core';
 import AbstarctChild from '../architecture/AbstarctChild';
 import GalleryView from './GalleryView';
 import GlobalScene from '$/global/scene/Scene';
@@ -15,7 +15,9 @@ export default class PhotoView extends AbstarctChild {
     private gallery: GalleryView
   ) {
     const photo = gallery.originalPhoto.clone(uuid, gallery.wall)!;
+
     photo.position = position.clone();
+    photo.rotation = new Vector3(0, Math.PI / 2, Math.PI);
 
     const meshs = photo.getChildMeshes() as Array<Mesh>;
     const picture = meshs[0];
@@ -43,8 +45,9 @@ export default class PhotoView extends AbstarctChild {
     `);
     //@ts-expect-error
     iconMaterial.diffuseTexture.uScale = -1;
+    iconMaterial.specularColor = new Color3(0, 0, 0);
     picture.material = iconMaterial;
-    picture.rotation = new Vector3(-Math.PI / 2, 0, 0);
+    picture.rotation = new Vector3(Math.PI / 2, 0, 0);
 
     super(meshs, gallery);
     this.photo = photo;
@@ -54,12 +57,11 @@ export default class PhotoView extends AbstarctChild {
   public click(): void {
     const camera = GlobalScene._.camera;
     const time =
-      Vector3.Distance(camera.position, this.photo.getAbsolutePosition()) *
-      2000;
+      Vector3.Distance(camera.position, this.photo.getAbsolutePosition()) * 200;
 
     const { x, y, z } = this.photo.getAbsolutePosition();
-    camera.smoothMove(new Vector3(x, y, z - 0.075), time);
-    camera.smoothRotation(new Vector3(0, 0, 0), time);
+    camera.smoothMove(new Vector3(x + 0.8, y, z), time);
+    camera.smoothRotation(new Vector3(0, -Math.PI / 2, 0), time);
 
     new OpenNotionPage().open(time, this.uuid);
 

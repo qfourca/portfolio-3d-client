@@ -7,13 +7,14 @@ import api from '$/api/api';
 import PhotoView from './PhotoView';
 
 export default class GalleryView extends AbstactChildParent<PhotoView> {
-  private static rootPosition: Vector3 = new Vector3(0.7, 0.6, -1);
-  private static photoSize: Vector2 = new Vector2(-0.3, -0.5);
+  private static rootPosition: Vector3 = new Vector3(0, 0, 0);
+  private static photoSize: Vector2 = new Vector2(-0.7, -0.8);
 
   public originalPhoto: TransformNode;
   constructor(public wall: Mesh, parent: Parentable<AbstarctChild>) {
     super(wall, parent);
     this.originalPhoto = wall.getChildTransformNodes()[0];
+    GalleryView.rootPosition = this.originalPhoto.position;
     api
       .get<
         Array<{
@@ -44,10 +45,10 @@ export default class GalleryView extends AbstactChildParent<PhotoView> {
   }
   public click(): void {
     const camera = GlobalScene._.camera;
-    const time =
-      Vector3.Distance(camera.position, new Vector3(0, 0.3, 0)) * 2000;
-    camera.smoothMove(new Vector3(0, 0.3, 0), time);
-    camera.smoothRotation(new Vector3(0.3, 0, 0), time);
+    const goalPosition = new Vector3(0.7, 1.8, 0);
+    const time = Vector3.Distance(camera.position, goalPosition) * 300;
+    camera.smoothMove(goalPosition, time);
+    camera.smoothRotation(new Vector3(0.1, -Math.PI / 2, 0), time);
     this.children.forEach((child) => {
       child.activate();
     });
@@ -64,10 +65,10 @@ export default class GalleryView extends AbstactChildParent<PhotoView> {
   public nextPhotoPosition() {
     const currentCount = this.children.length;
     return new Vector3(
-      GalleryView.rootPosition.x + (currentCount % 5) * GalleryView.photoSize.x,
+      GalleryView.rootPosition.x,
       GalleryView.rootPosition.y +
         Math.floor(currentCount / 5) * GalleryView.photoSize.y,
-      GalleryView.rootPosition.z
+      GalleryView.rootPosition.z + (currentCount % 5) * GalleryView.photoSize.x
     );
   }
 }

@@ -10,7 +10,7 @@ export default class SofaView extends AbstarctChild {
   click(): void {
     const camera = GlobalScene._.camera;
     const time =
-      Vector3.Distance(camera.position, this.sofa.getAbsolutePosition()) * 200;
+      Vector3.Distance(camera.position, this.sofa.getAbsolutePosition()) * 300;
 
     const { x, y, z } = this.sofa.getAbsolutePosition();
     camera.smoothMove(new Vector3(x, y + 1.2, z), time);

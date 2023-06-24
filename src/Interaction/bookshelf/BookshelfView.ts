@@ -45,7 +45,7 @@ export default class BookshelfView extends AbstactChildParent<BookView> {
     const camera = GlobalScene._.camera;
     const time =
       Vector3.Distance(camera.position, this.bookshelf.getAbsolutePosition()) *
-      200;
+      300;
 
     const { x, y, z } = this.bookshelf.getAbsolutePosition();
     camera.smoothMove(new Vector3(x, y, z + 2), time);
