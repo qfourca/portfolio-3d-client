@@ -28,7 +28,6 @@ export default class GalleryView extends AbstactChildParent<PhotoView> {
       >('/project/list')
       .then(({ data }) => {
         data.forEach((photoInfo) => {
-          console.log(this.frameColor.get(photoInfo.tag)!.toHexString());
           if (photoInfo.tag != 'LEGACY') {
             this.children.push(
               new PhotoView(
