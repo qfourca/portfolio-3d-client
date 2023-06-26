@@ -57,7 +57,7 @@ export default class GalleryView extends AbstactChildParent<PhotoView> {
 
   public click(): void {
     const camera = GlobalScene._.camera;
-    const goalPosition = new Vector3(0.7, 1.8, -0.2);
+    const goalPosition = new Vector3(0.3, 1.8, -0.2);
     const time = Vector3.Distance(camera.position, goalPosition) * 300;
     camera.smoothMove(goalPosition, time);
     camera.smoothRotation(new Vector3(0.1, Math.PI * 1.5, 0), time);

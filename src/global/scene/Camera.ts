@@ -6,7 +6,7 @@ import Config from '../config/Config';
 export default class CustomCamera extends UniversalCamera {
   constructor(scene: Scene, wheelElement?: HTMLElement) {
     super('camera', new Vector3(0, 2, 0), scene);
-    this.fov = 1;
+    this.fov = 1.2;
     this.rotation.x += 0.3;
     this.minZ = 0.01;
     this.maxZ = 100;

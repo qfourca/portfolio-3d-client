@@ -73,9 +73,12 @@ export default class BookTagModule {
     textureContext.fillStyle = '#000000';
     //@ts-expect-error
     textureContext.textAlign = 'center';
-    textureContext.font = '48px Belanosima';
+    let fontSize: number = 48;
+    if (this.name.length > 4) fontSize -= this.name.length * 1.5;
+    textureContext.font = fontSize + 'px Belanosima';
+    this.name = this.name.replace('(', '∧');
     for (let i = 0; i < this.name.length; i++) {
-      textureContext.fillText(this.name[i], 40, 40 + i * 40);
+      textureContext.fillText(this.name[i], 40, 50 + i * fontSize - 15);
     }
     texture.update(false);
 

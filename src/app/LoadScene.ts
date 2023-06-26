@@ -10,6 +10,7 @@ import GlobalScene from '$/global/scene/Scene';
 
 export default async () => {
   const load = await SceneLoader.AppendAsync('', room_model, GlobalScene._);
+
   load.lights.forEach((l) => {
     l.intensity = l.intensity / 10;
   });
