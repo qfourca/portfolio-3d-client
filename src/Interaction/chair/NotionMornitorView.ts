@@ -1,10 +1,18 @@
-import { TransformNode } from '@babylonjs/core';
+import { PBRMaterial, Texture, TransformNode } from '@babylonjs/core';
 import AbstarctChild from '../architecture/AbstarctChild';
 import ChairView from './ChairView';
+import NotionImage from '$static/notion.png';
 
 export default class NotionMornitorView extends AbstarctChild {
   constructor(mornitor: TransformNode, parent: ChairView) {
     super(mornitor, parent);
+    mornitor.getChildMeshes().forEach((screen) => {
+      if (screen.name.includes('MonitorScreen')) {
+        const material = screen.material as PBRMaterial;
+        const imageTexture = new Texture(NotionImage, null, false, false);
+        material.albedoTexture = imageTexture;
+      }
+    });
   }
 
   public click(): void {

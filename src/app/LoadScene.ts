@@ -1,10 +1,4 @@
-import {
-  Mesh,
-  SceneLoader,
-  ShadowGenerator,
-  SpotLight,
-  Vector3,
-} from '@babylonjs/core';
+import { Mesh, SceneLoader, ShadowGenerator, SpotLight } from '@babylonjs/core';
 import room_model from '$static/room4.glb';
 import GlobalScene from '$/global/scene/Scene';
 
