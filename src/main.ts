@@ -1,4 +1,5 @@
 import App from './app/App';
+import './style.scss';
 App.init(
   {
     debugUI: true,
