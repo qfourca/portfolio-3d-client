@@ -1,6 +1,13 @@
-import { Color3, Mesh, Texture, TransformNode, Vector3 } from '@babylonjs/core';
+import {
+  Color3,
+  Mesh,
+  PBRMaterial,
+  Texture,
+  TransformNode,
+  Vector3,
+} from '@babylonjs/core';
 import AbstarctChild from '../architecture/AbstarctChild';
-import GalleryView from './GalleryView';
+import GalleryView, { projectTag } from './GalleryView';
 import GlobalScene from '$/global/scene/Scene';
 import { CustomMaterial } from '@babylonjs/materials';
 import OpenNotionPage from '$/logic/OpenNotionPage';
@@ -12,6 +19,8 @@ export default class PhotoView extends AbstarctChild {
     thumbnail: string,
     private uuid: string,
     position: Vector3,
+    color: Color3,
+    public tag: projectTag,
     private gallery: GalleryView
   ) {
     const photo = gallery.originalPhoto.clone(uuid, gallery.wall)!;
@@ -21,6 +30,13 @@ export default class PhotoView extends AbstarctChild {
 
     const meshs = photo.getChildMeshes() as Array<Mesh>;
     const picture = meshs[0];
+
+    const frame = meshs[1];
+    const frameMaterial = (frame.material as PBRMaterial).clone(
+      tag + 'material'
+    );
+    frameMaterial.albedoColor = color;
+    frame.material = frameMaterial;
 
     const iconMaterial = new CustomMaterial(uuid + 'icon', GlobalScene._);
     const texture = new Texture(
@@ -32,9 +48,12 @@ export default class PhotoView extends AbstarctChild {
       () => {
         const { width, height } = texture.getSize();
         const ratio = width / height;
+
         photo.scaling = photo.scaling.multiply(
           ratio > 1 ? new Vector3(1, 1 / ratio, 1) : new Vector3(ratio, 1, 1)
         );
+        if (Math.abs(width - height) < 10)
+          photo.scaling = photo.scaling.multiply(new Vector3().setAll(0.85));
       }
     );
 

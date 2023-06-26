@@ -86,7 +86,7 @@ export default class BookView extends AbstarctChild {
       case 'tool':
         return 3;
       case 'etc':
-        return 4;
+        return 2;
     }
   };
   public static typeToColor = (type: bookType) => {
@@ -100,7 +100,7 @@ export default class BookView extends AbstarctChild {
       case 'tool':
         return '#27E1C1';
       case 'etc':
-        return '#7149C6';
+        return '#19A7CE';
     }
   };
 }
