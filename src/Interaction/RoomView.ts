@@ -13,6 +13,9 @@ import DoorView from './DoorView';
 export default class RoomView implements Parentable<AbstarctChild> {
   private children: Array<AbstarctChild> = new Array();
   constructor() {
+    const doorView = new DoorView(GlobalScene._.getMeshByName('Door')!, this);
+    this.appendChild(doorView);
+    doorView.click(true);
     this.appendChild(
       new SofaView(GlobalScene._.getTransformNodeByName('Sofa')!, this)
     );
@@ -34,9 +37,6 @@ export default class RoomView implements Parentable<AbstarctChild> {
         )
       );
     }
-    const doorView = new DoorView(GlobalScene._.getMeshByName('Door')!, this);
-    this.appendChild(doorView);
-    doorView.click(true);
   }
   appendChild(child: AbstarctChild): void {
     this.children.push(child);
